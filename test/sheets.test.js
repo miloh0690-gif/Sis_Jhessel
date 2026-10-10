@@ -190,3 +190,46 @@ test('conCache borra la entrada si el calculo falla, para no cachear el error', 
   const r = await s.conCache('k2', async function () { return 'recuperado'; });
   assert.equal(r, 'recuperado');
 });
+
+test('normalizar quita acentos, baja a minusculas y colapsa espacios', function () {
+  assert.equal(s.normalizar('  Camará  Póker '), 'camara poker');
+  assert.equal(s.normalizar(''), '');
+  assert.equal(s.normalizar(null), '');
+  assert.equal(s.normalizar(undefined), '');
+});
+
+test('leer arma la query con la accion y los filtros extra', async function () {
+  s.limpiarCache();
+  let vista = '';
+  globalThis.fetch = async function (url) {
+    vista = String(url);
+    return { ok: true, status: 200, text: async function () { return '{"status":"OK","ventas":[]}'; } };
+  };
+  await s.leer('REPORTE_VENTAS', { desde: '2026-10-01', hasta: '2026-10-31', idTienda: 'T1' });
+  assert.ok(vista.indexOf('action=REPORTE_VENTAS') !== -1, vista);
+  assert.ok(vista.indexOf('desde=2026-10-01') !== -1, vista);
+  assert.ok(vista.indexOf('hasta=2026-10-31') !== -1, vista);
+  assert.ok(vista.indexOf('idTienda=T1') !== -1, vista);
+});
+
+test('leer tambien acepta la forma objeto con accion adentro', async function () {
+  s.limpiarCache();
+  let vista = '';
+  globalThis.fetch = async function (url) {
+    vista = String(url);
+    return { ok: true, status: 200, text: async function () { return '{}'; } };
+  };
+  await s.leer({ accion: 'REPORTE_TIENDAS' });
+  assert.ok(vista.indexOf('action=REPORTE_TIENDAS') !== -1, vista);
+});
+
+test('leer lanza 502 cuando el script responde NO_AUTORIZADO', async function () {
+  s.limpiarCache();
+  globalThis.fetch = async function () {
+    return { ok: true, status: 200, text: async function () { return '{"error":"NO_AUTORIZADO"}'; } };
+  };
+  await assert.rejects(
+    function () { return s.leer('REPORTE_VENTAS'); },
+    function (err) { return err.codigo === 502; }
+  );
+});

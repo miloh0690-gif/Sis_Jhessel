@@ -163,3 +163,24 @@ test('exigirAuth normaliza cualquier rol raro a tienda (fail-safe)', function ()
   auth.exigirAuth(req, { status: function () { return this; }, json: function () {} }, function () {});
   assert.equal(req.sesion.rol, 'tienda');
 });
+test('crearSesion acepta un objeto y guarda el idEmpleado', function () {
+  const token = auth.crearSesion({ rol: auth.ROL_TIENDA, idTienda: 'T1', idEmpleado: 'E7', nombre: 'Miros' });
+  const carga = auth.verificar(token);
+  assert.equal(carga.rol, 'tienda');
+  assert.equal(carga.idTienda, 'T1');
+  assert.equal(carga.idEmpleado, 'E7');
+  assert.equal(carga.nombre, 'Miros');
+});
+
+test('crearToken tambien acepta la forma posicional que ya usaba', function () {
+  const carga = auth.verificar(auth.crearToken('DUENO', null, 'Dueño'));
+  assert.equal(carga.rol, 'dueno');
+  assert.equal(carga.idTienda, '');
+});
+
+test('crearSesion y exigirSesion son los mismos que crearToken y exigirAuth', function () {
+  assert.equal(auth.crearSesion, auth.crearToken);
+  assert.equal(auth.exigirSesion, auth.exigirAuth);
+  assert.equal(auth.ROL_TIENDA, 'tienda');
+  assert.equal(auth.ROL_DUENO, 'dueno');
+});

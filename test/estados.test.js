@@ -110,3 +110,25 @@ test('borrar: solo BORRADOR, y el dueño tambien', function () {
   assert.equal(e.puedeBorrar('ANULADA', D), false);
   assert.equal(e.puedeBorrar('inventado', D), false);
 });
+
+test('puedeEditarCosto y puedeVerCosto siguen la regla del dueno', function () {
+  assert.equal(e.puedeEditarCosto(D, 'BORRADOR'), true);
+  assert.equal(e.puedeEditarCosto(T, 'BORRADOR'), true);
+  assert.equal(e.puedeEditarCosto(T, 'CONFIRMADA'), false);
+  assert.equal(e.puedeEditarCosto(D, 'CONFIRMADA'), true);
+  assert.equal(e.puedeEditarCosto(D, 'CERRADA'), false);
+  // Un rol raro nunca sube de privilegios: vale como tienda, no mas.
+  assert.equal(e.puedeEditarCosto('inventado', 'BORRADOR'), e.puedeEditarCosto(T, 'BORRADOR'));
+  assert.equal(e.puedeVerCosto(D), true);
+  assert.equal(e.puedeVerCosto(T), false);
+  assert.equal(e.puedeVerCosto('inventado'), false);
+});
+
+test('explicarTransicion devuelve vacio si se permite y un motivo si se rechaza', function () {
+  assert.equal(e.explicarTransicion({ rol: D, desde: 'BORRADOR', hasta: 'CONFIRMADA' }), '');
+  assert.equal(e.explicarTransicion({ rol: T, desde: 'BORRADOR', hasta: 'CONFIRMADA' }), '');
+  const motivo = e.explicarTransicion({ rol: T, desde: 'BORRADOR', hasta: 'CERRADA' });
+  assert.ok(typeof motivo === 'string' && motivo.length > 10, 'debe explicar el rechazo');
+  assert.ok(e.explicarTransicion({ rol: T, desde: 'CERRADA', hasta: 'BORRADOR' }).length > 10);
+  assert.ok(e.explicarTransicion({ rol: D, desde: 'inventado', hasta: 'BORRADOR' }).length > 10);
+});

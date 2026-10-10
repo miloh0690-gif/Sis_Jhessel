@@ -109,11 +109,19 @@ function verificar(token) {
 }
 
 // Crea el token de sesion con 8 horas de vida.
+// Acepta las dos formas: crearToken('DUENO', '', 'Dueno') y
+// crearToken({rol, idTienda, idEmpleado, nombre}). El rol se normaliza a
+// minusculas para que la comparacion de permisos sea siempre la misma.
 function crearToken(rol, idTienda, nombre) {
+  const datos = (rol && typeof rol === 'object')
+    ? rol
+    : { rol: rol, idTienda: idTienda, nombre: nombre };
+  const vacio = function (v) { return v === null || v === undefined ? '' : String(v); };
   return firmar({
-    rol: String(rol || ''),
-    idTienda: idTienda === null || idTienda === undefined ? '' : String(idTienda),
-    nombre: String(nombre || ''),
+    rol: String(datos.rol || '').toLowerCase(),
+    idTienda: vacio(datos.idTienda),
+    idEmpleado: vacio(datos.idEmpleado),
+    nombre: String(datos.nombre || ''),
     exp: Date.now() + DURACION_MS
   });
 }
@@ -187,6 +195,8 @@ module.exports = {
   NOMBRE_COOKIE,
   DURACION_MS,
   ROLES,
+  ROL_TIENDA: ROLES.TIENDA,
+  ROL_DUENO: ROLES.DUENO,
   secreto,
   olvidarSecreto,
   hashearClave,
@@ -194,11 +204,13 @@ module.exports = {
   firmar,
   verificar,
   crearToken,
+  crearSesion: crearToken,
   leerCookies,
   crearCookie,
   borrarCookie,
   sesion,
   estaAutenticado,
   exigirAuth,
+  exigirSesion: exigirAuth,
   esDueno
 };

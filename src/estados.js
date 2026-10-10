@@ -121,6 +121,48 @@ function puedeBorrar(estado, rol) {
   return e === ESTADOS.BORRADOR;
 }
 
+// --- reglas de costo y motivo del rechazo ---------------------------------
+
+// El costo lo edita el dueño siempre, y el encargado solo mientras la venta
+// es un borrador. Una vez confirmada, el encargado ya no puede cambiar lo que
+// costo el equipo.
+function puedeEditarCosto(rol, estado) {
+  const r = normalizarRol(rol);
+  const s = normalizarEstado(estado);
+  if (!esEstadoValido(s)) return false;
+  if (r === ROLES.DUENO) return s !== 'CERRADA' && s !== 'ANULADA';
+  return s === 'BORRADOR';
+}
+
+// El costo solo lo ve el dueño: el encargado necesita conocer su ganancia,
+// no el costo del equipo.
+function puedeVerCosto(rol) {
+  return normalizarRol(rol) === ROLES.DUENO;
+}
+
+// Devuelve '' cuando la transicion esta permitida, y el motivo en espanol
+// cuando se rechaza, para que el servidor pueda explicar sin inventar texto.
+function explicarTransicion({ rol, desde, hasta } = {}) {
+  const r = normalizarRol(rol);
+  const d = normalizarEstado(desde);
+  const h = normalizarEstado(hasta);
+  if (!esEstadoValido(h)) return 'El estado "' + String(hasta) + '" no existe.';
+  if (!esEstadoValido(d)) return 'La venta esta en un estado que no se reconoce.';
+  if (puedeTransicionar(d, h, r)) return '';
+  if (estaCerrada(d)) {
+    return 'Una venta cerrada solo la puede reabrir o anular el dueno, y es lo unico que se puede hacer con ella.';
+  }
+  if (String(d) === 'ANULADA') {
+    return 'Una venta anulada ya no se toca: queda registrada como anulada.';
+  }
+  if (String(h) === 'CERRADA') {
+    return 'Solo el dueno puede cerrar una tienda y registrar el pago.';
+  }
+  if (r !== ROLES.DUENO) {
+    return 'Como encargado no podes pasar de ' + d + ' a ' + h + '. Esa operacion es del dueno.';
+  }
+  return 'No se puede pasar de ' + d + ' a ' + h + '.';
+}
 module.exports = {
   ESTADOS,
   LISTA_ESTADOS,
@@ -135,5 +177,8 @@ module.exports = {
   estaCerrada,
   estaPendiente,
   puedeEditarContenido,
-  puedeBorrar
+  puedeBorrar,
+  puedeEditarCosto,
+  puedeVerCosto,
+  explicarTransicion
 };

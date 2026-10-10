@@ -117,10 +117,18 @@ async function escribir(payload) {
   return datos;
 }
 
-async function leer(params) {
+async function leer(accion, extra) {
   const c = config();
   if (!c.url) throw error('Falta SHEETS_WEBAPP_URL en el servidor.', 503);
-  const query = new URLSearchParams(Object.assign({}, params, { key: c.clave })).toString();
+  // Acepta las dos formas: leer('REPORTE_VENTAS') y leer({accion, ...filtros}).
+  // Los filtros viajan en la query; el .gs los usa solo para acotar.
+  const base = (accion && typeof accion === 'object')
+    ? Object.assign({}, accion)
+    : Object.assign({}, extra, { accion: accion });
+  // El .gs lee e.parameter.action: el parametro de la URL se llama 'action'.
+  const query = new URLSearchParams(
+    Object.assign({}, base, { action: base.accion, key: c.clave })
+  ).toString();
   const url = c.url + (c.url.indexOf('?') !== -1 ? '&' : '?') + query;
   const controlador = new AbortController();
   const temporizador = setTimeout(function () { controlador.abort(); }, TIMEOUT_MS);
@@ -226,6 +234,17 @@ async function conCache(clave, calcular) {
   return enCurso;
 }
 
+// Compara textos sin depender de acentos, mayusculas ni espacios dobles.
+function normalizar(texto) {
+  if (texto === null || texto === undefined) return '';
+  return String(texto)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 module.exports = {
   TIMEOUT_MS,
   CACHE_TTL_MS,
@@ -238,6 +257,7 @@ module.exports = {
   pedirRemoto,
   escribir,
   leer,
+  normalizar,
   salud,
   diagnostico,
   limpiarCache,

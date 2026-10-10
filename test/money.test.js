@@ -192,3 +192,57 @@ test('precioBsAUsdCents y su inversa son coherentes', function () {
   assert.equal(m.precioBsAUsdCents(1500000, 0), 0);
   assert.equal(m.precioUsdCentsAPrecioBsCents(150000, 0), 0);
 });
+test('calcularTotales devuelve los totales y no la nota', function () {
+  const r = m.calcularTotales({
+    moneda: 'USD',
+    tcDecimas: TC,
+    pctComisionBp: BP_30,
+    lineas: [{ modelo: 'X', cantidad: 1, precioUsdCents: 10000, costoUnitarioUsdCents: 6000 }],
+    ajustesUsdCents: 0
+  });
+  assert.equal(r.gananciaBrutaUsdCents, 4000);
+  assert.equal(r.gananciaNetaUsdCents, 4000);
+  assert.equal(r.gananciaBsCents, 40000);
+  assert.equal(r.comisionBsCents, 12000);
+  assert.equal(r.netoDuenoBsCents, 28000);
+  assert.equal(r.cantidadLineas, 1);
+  assert.equal(r.unidades, 1);
+  assert.equal(r.nota, undefined);
+  assert.equal(r.notas, undefined);
+});
+
+test('resumenVentas agrupa por tienda, empleado y dia', function () {
+  const ventas = [
+    { fecha: '2026-10-08T10:00:00.000Z', idTienda: 'T1', tienda: 'Uno', idEmpleado: 'E1', vendedor: 'Camila', estado: 'CONFIRMADA', tcDecimas: 1000, unidades: 1, gananciaBsCents: 40000, comisionBsCents: 12000, netoDuenoBsCents: 28000, totalCobradoUsdCents: 10000 },
+    { fecha: '2026-10-09T10:00:00.000Z', idTienda: 'T1', tienda: 'Uno', idEmpleado: 'E2', vendedor: 'Andre', estado: 'CERRADA', tcDecimas: 1000, unidades: 2, gananciaBsCents: -7000, comisionBsCents: 0, netoDuenoBsCents: -7000, totalCobradoUsdCents: 20000 },
+    { fecha: '2026-10-07T10:00:00.000Z', idTienda: 'T2', tienda: 'Dos', idEmpleado: 'E3', vendedor: 'Miros', estado: 'BORRADOR', tcDecimas: 1000, unidades: 1, gananciaBsCents: 90000, comisionBsCents: 27000, netoDuenoBsCents: 63000, totalCobradoUsdCents: 90000 }
+  ];
+  const r = m.resumenVentas(ventas);
+  assert.equal(r.cantidadVentas, 3);
+  assert.equal(r.unidades, 4);
+  assert.equal(r.totalGananciaBsCents, 40000 - 7000 + 90000);
+  assert.equal(r.totalComisionBsCents, 12000 + 27000);
+  assert.equal(r.totalNetoDuenoBsCents, 28000 - 7000 + 63000);
+  assert.equal(r.totalCobradoBsCents, 1200000);
+  assert.deepEqual(r.porTienda.map(function (t) { return t.idTienda; }), ['T2', 'T1']);
+  assert.equal(r.porTienda[1].pendientes, 1);
+  assert.equal(r.porTienda[0].pendientes, 0);
+  assert.deepEqual(r.porDia.map(function (d) { return d.dia; }), ['2026-10-07', '2026-10-08', '2026-10-09']);
+  assert.equal(r.porEmpleado.length, 3);
+  assert.equal(r.porDia[1].cantidadVentas, 1);
+});
+
+test('resumenVentas con lista vacia no rompe y todo queda en cero', function () {
+  const r = m.resumenVentas([]);
+  assert.equal(r.cantidadVentas, 0);
+  assert.equal(r.totalGananciaBsCents, 0);
+  assert.deepEqual(r.porTienda, []);
+  assert.deepEqual(r.porDia, []);
+});
+
+test('resumenVentas acepta totalCobradoBsCents ya calculado en la hoja', function () {
+  const r = m.resumenVentas([
+    { fecha: '2026-10-08', idTienda: 'T1', tienda: 'Uno', idEmpleado: 'E1', vendedor: 'Camila', estado: 'CONFIRMADA', tcDecimas: 1000, unidades: 1, gananciaBsCents: 1000, comisionBsCents: 300, netoDuenoBsCents: 700, totalCobradoUsdCents: 5000, totalCobradoBsCents: 999999 }
+  ]);
+  assert.equal(r.totalCobradoBsCents, 999999);
+});

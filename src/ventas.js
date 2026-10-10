@@ -288,6 +288,15 @@ function duenoDeLaSesion(sesion) {
   return estados.normalizarRol(sesion && sesion.rol) === estados.ROLES.DUENO;
 }
 
+// El dueno ve las cuatro tiendas. Un encargado solo la suya: si la venta es de
+// otra, no existe para el. Sin esta comprobacion, conocer el IdVenta de otra
+// tienda bastaba para confirmar, reabrir o borrar sus ventas.
+function esDeLaSesion(sesion, venta) {
+  if (!venta) return false;
+  if (duenoDeLaSesion(sesion)) return true;
+  return String(venta.idTienda || '') === String((sesion && sesion.idTienda) || '');
+}
+
 async function actualizarVenta({ sesion, idVenta, cuerpo } = {}) {
   const id = String(idVenta || '').trim();
   if (!id) throw noEncontrado('No se encontro esa venta.');
@@ -375,6 +384,7 @@ async function cambiarEstado({ sesion, idVenta, hasta, motivo } = {}) {
 
   const actual = await ventaPorId(id);
   if (!actual) throw noEncontrado('No se encontro esa venta.');
+  if (!esDeLaSesion(sesion, actual)) throw noEncontrado('No se encontro esa venta.');
 
   if (!estados.puedeTransicionar(actual.estado, destino, sesion && sesion.rol)) {
     throw noEncontrado(estados.explicarTransicion({
@@ -414,6 +424,7 @@ async function eliminarVenta({ sesion, idVenta } = {}) {
   if (!id) throw noEncontrado('No se encontro esa venta.');
   const actual = await ventaPorId(id);
   if (!actual) throw noEncontrado('No se encontro esa venta.');
+  if (!esDeLaSesion(sesion, actual)) throw noEncontrado('No se encontro esa venta.');
   if (!estados.puedeBorrar(actual.estado, sesion && sesion.rol)) {
     throw noEncontrado('Solo una venta en borrador se borra.');
   }
@@ -429,6 +440,25 @@ function listarLineasDe(idVenta) {
   return ledger.listarLineasDe(String(idVenta || '').trim());
 }
 
+// Lectura de lineas con la sesion de por medio: 404 si la venta no es de esta
+// tienda y sin costo para el encargado (el costo del equipo es del dueno).
+async function lineasDeLaSesion({ sesion, idVenta } = {}) {
+  const id = String(idVenta || '').trim();
+  if (!id) throw noEncontrado('No se encontro esa venta.');
+  const actual = await ventaPorId(id);
+  if (!actual) throw noEncontrado('No se encontro esa venta.');
+  if (!esDeLaSesion(sesion, actual)) throw noEncontrado('No se encontro esa venta.');
+
+  const crudas = await ledger.listarLineasDe(id);
+  const lista = Array.isArray(crudas) ? crudas : [];
+  if (duenoDeLaSesion(sesion)) return lista.slice();
+  return lista.map(function (linea) {
+    const copia = Object.assign({}, linea);
+    delete copia.costoUnitarioUsdCents;
+    return copia;
+  });
+}
+
 module.exports = {
   CLAVE_VIGENCIA_MS,
   CLAVE_MAXIMO,
@@ -439,6 +469,8 @@ module.exports = {
   cambiarEstado,
   eliminarVenta,
   listarLineasDe,
+  lineasDeLaSesion,
+  esDeLaSesion,
   operacionRecordada,
   recordarOperacion,
   limpiarOperaciones,

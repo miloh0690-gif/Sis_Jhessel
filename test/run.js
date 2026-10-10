@@ -14,6 +14,7 @@ const ARCHIVOS = [
   'ledger',
   'catalogo',
   'idempotencia',
+  'permisos-tienda',
   'cierres',
   'codegs',
   'ui'

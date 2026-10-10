@@ -122,7 +122,7 @@ function tiendaDeLaPeticion(req) {
   const sesion = req.sesion || {};
   const pedida = texto(req.query && (req.query.tienda || req.query.idTienda), 40);
   const propia = texto(sesion.idTienda, 40);
-  if (auth.esDueno(sesion)) return pedida || propia;
+  if (auth.esDueno(req)) return pedida || propia;
   return propia;
 }
 
@@ -340,8 +340,8 @@ app.get('/api/ventas', async function (req, res) {
 app.get('/api/ventas/:id/lineas', async function (req, res) {
   try {
     const idVenta = texto(req.params.id, 60);
-    const linea = await ventas.listarLineasDe(idVenta);
-    res.json({ lineas: limpiarVentas(linea, esDueno(req)) });
+    const lineas = await ventas.lineasDeLaSesion({ sesion: req.sesion, idVenta: idVenta });
+    res.json({ lineas: lineas });
   } catch (e) {
     responderError(res, e);
   }

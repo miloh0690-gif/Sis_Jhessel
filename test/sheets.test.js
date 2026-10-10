@@ -90,8 +90,10 @@ test('pareceFalloDeAuth reconoce los 4akovichos de Apps Script', function () {
   assert.equal(s.pareceFalloDeAuth({ error: 'NO_AUTORIZADO' }, 200), true);
   assert.equal(s.pareceFalloDeAuth({ message: 'Invalid token' }, 200), true);
   assert.equal(s.pareceFalloDeAuth({ message: 'API KEY invalida' }, 200), true);
-  assert.equal(s.pareceFalloDeAuth(null, 401), true);
-  assert.equal(s.pareceFalloDeAuth(null, 403), true);
+  // Un 401/403 SIN cuerpo de auth no es evidencia de que la clave sea mala:
+  // en produccion fue la pagina de acceso denegado de Google. Se corrige.
+  assert.equal(s.pareceFalloDeAuth(null, 401), false);
+  assert.equal(s.pareceFalloDeAuth(null, 403), false);
   assert.equal(s.pareceFalloDeAuth({ status: 'OK' }, 200), false);
   assert.equal(s.pareceFalloDeAuth(null, 200), false);
 });
@@ -232,4 +234,68 @@ test('leer lanza 502 cuando el script responde NO_AUTORIZADO', async function ()
     function () { return s.leer('REPORTE_VENTAS'); },
     function (err) { return err.codigo === 502; }
   );
+});
+test('un 403 con HTML de Google se reporta como acceso al despliegue, no como clave mala', async function () {
+  // Lo que devolvio Google el 2026-10-10: pagina de Drive, no JSON.
+  // Decir "revisa la clave" manda a cambiar SHEETS_API_KEY sin resolver el problema.
+  s.limpiarCache();
+  globalThis.fetch = async function () {
+    return new Response('<!DOCTYPE html><html><head><title>Acceso denegado</title></head><body>Acceso denegado</body></html>', {
+      status: 403,
+      headers: { 'content-type': 'text/html' }
+    });
+  };
+  await assert.rejects(
+    function () { return s.leer('REPORTE_VENTAS'); },
+    function (err) {
+      assert.equal(err.codigo, 502);
+      assert.ok(/acceso/i.test(err.message), 'el mensaje debe hablar de acceso: ' + err.message);
+      assert.ok(/Cualquier persona/i.test(err.message), 'debe decir quien tiene acceso: ' + err.message);
+      assert.equal(/rechaz[oó] la clave/i.test(err.message), false, 'no debe culpar a la clave: ' + err.message);
+      return true;
+    }
+  );
+});
+
+test('escribir() tambien distingue el 403 de permisos del 403 de clave', async function () {
+  globalThis.fetch = async function () {
+    return new Response('<html><title>Acceso denegado</title></html>', {
+      status: 403,
+      headers: { 'content-type': 'text/html' }
+    });
+  };
+  await assert.rejects(
+    function () { return s.escribir({ tipoOperacion: 'GUARDAR_VENTA' }); },
+    function (err) {
+      assert.equal(err.codigo, 502);
+      assert.ok(/acceso/i.test(err.message), 'el mensaje debe hablar de acceso: ' + err.message);
+      assert.equal(/rechaz[oó] la clave/i.test(err.message), false, 'no debe culpar a la clave: ' + err.message);
+      return true;
+    }
+  );
+});
+
+test('un 403 con JSON NO_AUTORIZADO sigue siendo un problema de clave', async function () {
+  s.limpiarCache();
+  globalThis.fetch = async function () {
+    return new Response('{"status":"ERROR","message":"NO_AUTORIZADO"}', {
+      status: 403,
+      headers: { 'content-type': 'application/json' }
+    });
+  };
+  await assert.rejects(
+    function () { return s.leer('REPORTE_VENTAS'); },
+    function (err) {
+      assert.equal(err.codigo, 502);
+      assert.ok(/rechaz[oó] la clave/i.test(err.message), 'aqui si es la clave: ' + err.message);
+      return true;
+    }
+  );
+});
+
+test('pareceFalloDeAuth ya no llama auth a un 403 sin cuerpo de clave', function () {
+  assert.equal(s.pareceFalloDeAuth(null, 403), false);
+  assert.equal(s.pareceFalloDeAuth({}, 403), false);
+  assert.equal(s.pareceFalloDeAuth({ error: 'NO_AUTORIZADO' }, 200), true);
+  assert.equal(s.pareceFalloDeAuth({ error: 'NO_AUTORIZADO' }, 403), true);
 });

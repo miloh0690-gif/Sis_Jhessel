@@ -44,10 +44,24 @@ function error(mensaje, codigo) {
   return e;
 }
 
+const MENSAJE_ACCESO = 'El despliegue de Google Apps Script devolvio 403 con la pagina de ' +
+  'acceso denegado: el script no acepta peticiones anonimas. Eso NO es la clave. En Apps Script: ' +
+  'Implementar > Nueva implementacion > Tipo: Aplicacion web > Ejecutar como: Yo > ' +
+  'Quien tiene acceso: Cualquier persona. Despues implementalo de nuevo y recarga esta pantalla.';
+
+// Un 403 de permisos y un 403 de clave se parecen en el estado pero no en el
+// cuerpo: la clave devuelve JSON con NO_AUTORIZADO, el acceso devuelve HTML de Google.
+// Confundirlos mandaba a cambiar SHEETS_API_KEY una y otra vez sin resolver nada.
+function esAccesoDenegado(datos, textoCrudo, estadoHttp) {
+  if (estadoHttp !== 401 && estadoHttp !== 403) return false;
+  if (datos !== null && datos !== undefined) return false;
+  const crudo = String(textoCrudo || '').trim();
+  return crudo.charAt(0) === '<' || crudo.indexOf('<html') !== -1;
+}
+
 function pareceFalloDeAuth(datos, estadoHttp) {
   const texto = (datos && (datos.message || datos.error)) || '';
   const mayus = String(texto).toUpperCase();
-  if (estadoHttp === 401 || estadoHttp === 403) return true;
   return mayus.indexOf('NO_AUTORIZADO') !== -1 ||
     mayus.indexOf('UNAUTHORIZED') !== -1 ||
     mayus.indexOf('TOKEN') !== -1 ||
@@ -91,6 +105,9 @@ async function pedirRemoto(payload) {
     datos = null;
   }
 
+  if (esAccesoDenegado(datos, texto, respuesta.status)) {
+    throw error(MENSAJE_ACCESO, 502);
+  }
   if (pareceFalloDeAuth(datos, respuesta.status)) {
     throw error('Google Sheets rechazo la clave. Revisa SHEETS_API_KEY en Render y en el script.', 502);
   }
@@ -136,6 +153,9 @@ async function leer(accion, extra) {
   try {
     const respuesta = await fetch(url, { method: 'GET', signal: controlador.signal });
     texto = await respuesta.text();
+    if (esAccesoDenegado(null, texto, respuesta.status)) {
+      throw error(MENSAJE_ACCESO, 502);
+    }
     if (respuesta.status === 401 || respuesta.status === 403) {
       throw error('Google Sheets rechazo la clave.', 502);
     }
@@ -254,6 +274,8 @@ module.exports = {
   construirUrl,
   error,
   pareceFalloDeAuth,
+  esAccesoDenegado,
+  MENSAJE_ACCESO,
   pedirRemoto,
   escribir,
   leer,

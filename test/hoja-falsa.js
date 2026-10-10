@@ -94,6 +94,9 @@ function crearEntorno(opciones) {
   const clave = config.clave === undefined ? CLAVE : config.clave;
   const hojas = config.hojas || {};
   const registro = [];
+  // Propiedades del script: arrancan con la clave puesta, como si el dueño ya
+  // la hubiera configurado. El arnes de generarClaveCompartida() la escribe.
+  const propiedades = { SHEETS_API_KEY: clave };
   const ss = {
     getSheetByName: function (nombre) { return hojas[nombre] || null; },
     insertSheet: function (nombre) {
@@ -108,7 +111,15 @@ function crearEntorno(opciones) {
     },
     PropertiesService: {
       getScriptProperties: function () {
-        return { getProperty: function () { return clave; } };
+        return {
+          getProperty: function (nombre) {
+            return Object.prototype.hasOwnProperty.call(propiedades, nombre)
+              ? propiedades[nombre]
+              : '';
+          },
+          setProperty: function (nombre, valor) { propiedades[nombre] = String(valor); },
+          deleteProperty: function (nombre) { delete propiedades[nombre]; }
+        };
       }
     },
     LockService: {
@@ -141,7 +152,8 @@ function crearEntorno(opciones) {
     path.join(__dirname, '..', 'apps-script', 'Code.gs'), 'utf8');
   vm.runInContext(fuente, contexto, { filename: 'Code.gs' });
 
-  return { contexto: contexto, hojas: hojas, registro: registro, ss: ss };
+  return { contexto: contexto, hojas: hojas, registro: registro, ss: ss,
+    propiedades: propiedades };
 }
 
 function respuesta(objeto) {

@@ -91,7 +91,13 @@ function claveEsValida(recibida) {
 function generarClaveCompartida() {
   var clave = Utilities.getUuid().replace(/-/g, '') +
     Utilities.getUuid().replace(/-/g, '');
+  // Se guarda sola como propiedad del script. Copiarla a mano a Configuracion
+  // del proyecto > Propiedades del script es el paso que mas se olvida, y si se
+  // olvida claveEsValida() devuelve false para siempre.
+  PropertiesService.getScriptProperties().setProperty('SHEETS_API_KEY', clave);
   Logger.log('SHEETS_API_KEY = ' + clave);
+  Logger.log('Guardada como propiedad del script SHEETS_API_KEY. ' +
+    'Ahora ponela en SHEETS_API_KEY en Render y borra esta funcion.');
   return clave;
 }
 

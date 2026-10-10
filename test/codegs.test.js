@@ -444,3 +444,25 @@ test('generarClaveCompartida loguea una clave de 64 caracteres', () => {
   assert.equal(valor.length, 64);
   assert.match(valor, /^[0-9a-f]+$/);
 });
+
+test('generarClaveCompartida guarda la clave como propiedad del script', () => {
+  // Si solo la loguea, el dueño tiene que copiarla a mano a Configuracion del
+  // proyecto > Propiedades del script. Si se le olvida, claveEsValida() devuelve
+  // false para siempre y el paso 4 del diagnostico nunca pasa.
+  const entorno = crearEntorno({ clave: '' });
+  entorno.contexto.generarClaveCompartida();
+  const guardada = entorno.propiedades.SHEETS_API_KEY;
+  assert.equal(typeof guardada, 'string');
+  assert.equal(guardada.length, 64);
+  assert.match(guardada, /^[0-9a-f]+$/);
+  assert.equal(entorno.contexto.claveEsValida(guardada), true,
+    'la clave recien generada tiene que validar contra si misma');
+});
+
+test('la clave que genera el script es la misma que valida, sin copiar a mano', () => {
+  const entorno = crearEntorno({ clave: '' });
+  assert.equal(entorno.contexto.claveEsValida('cualquier-cosa'), false);
+  const clave = entorno.contexto.generarClaveCompartida();
+  assert.equal(entorno.propiedades.SHEETS_API_KEY, clave);
+  assert.equal(entorno.contexto.claveEsValida(clave), true);
+});

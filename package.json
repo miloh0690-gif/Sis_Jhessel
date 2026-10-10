@@ -1,0 +1,22 @@
+{
+  "name": "sis-jhessel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Control de ventas, comisiones y cierre diario de cuatro tiendas de celulares",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "pruebas": "node --test test/",
+    "hash-clave": "node scripts/hash-clave.js",
+    "sembrar": "node scripts/sembrar-catalogo.js",
+    "sintaxis": "node scripts/verificar-sintaxis.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

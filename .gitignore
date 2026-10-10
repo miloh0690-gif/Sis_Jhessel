@@ -4,3 +4,6 @@ data/
 *.tmp
 .DS_Store
 .superpowers/
+
+# Respuestas crudas de la API de specs: pesan y se vuelven a pedir.
+datos/cache-specs.json

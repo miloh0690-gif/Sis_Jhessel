@@ -1,0 +1,401 @@
+{
+ "generadoEn": "2026-10-10T14:10:26.571Z",
+ "origen": "/Users/milo25/Desktop/sis_zamir/src/fichas.json",
+ "total": 49,
+ "conFicha": 43,
+ "sinFicha": 6,
+ "productos": [
+  {
+   "idProducto": "BLACK-SHARK",
+   "marca": "Black Shark",
+   "modelo": "",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "",
+   "imagen": ""
+  },
+  {
+   "idProducto": "HONOR-MAGIC-8-PRO",
+   "marca": "Honor",
+   "modelo": "Magic 8 Pro",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: LTPO OLED, 1B colors, 120Hz, 4320Hz PWM, Dolby Vision, HDR Vivid, 1800 nits (HBM), 6000 nits (peak) · Resolucion: 1256 x 2808 pixels, 20:9 ratio (~458 ppi density) · Procesador: Qualcomm SM8850-AC Snapdragon 8 Elite Gen 5 (3 nm) · Sistema: Android 16, up to 7 major Android upgrades, MagicOS 10 · Memoria: 256GB 12GB RAM, 512GB 12GB RAM, 512GB 16GB RAM, 1TB 16GB RAM · Camara: 50 MP, f/1.6, 23mm (wide), 1/1.3\", 1.2µm, multi-directional PDAF, OIS 200 MP, f/2.6, 85mm (periscope telephoto), 1/1.4\", 0.56µm, multi-directional PDAF, OIS, 3.7x optical zoom 50 MP, f/2.0,... · Selfie: 50 MP, f/2.0, 21mm (wide), 1/2.93\", 0.6µm TOF 3D, (depth/biometrics sensor) · Bateria: Si/C Li-Ion 7100 mAh (Global); 6270 mAh (Europe); 7200 mAh... · Carga: 100W wired (Global) 120W wired, 100W PPS, 40W UFCS (China) 80W wireless Reverse wireless... · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, October 15 · Resistencia: IP68/IP69K dust tight and water resistant (high pressure water jets; immersible up to 1.5...",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/honor/honor-magic8-pro-1.jpg"
+  },
+  {
+   "idProducto": "HONOR-PAD-X8A",
+   "marca": "Honor",
+   "modelo": "Pad X8a",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "",
+   "imagen": ""
+  },
+  {
+   "idProducto": "HONOR-PAD-X9A",
+   "marca": "Honor",
+   "modelo": "Pad X9a",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "",
+   "imagen": ""
+  },
+  {
+   "idProducto": "HONOR-X5-PLUS",
+   "marca": "Honor",
+   "modelo": "X5 Plus",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "",
+   "imagen": ""
+  },
+  {
+   "idProducto": "INFINIX-HOT-60-PRO-PLUS",
+   "marca": "Infinix",
+   "modelo": "Hot 60 Pro Plus",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "",
+   "imagen": ""
+  },
+  {
+   "idProducto": "IPAD-AIR-11-M4",
+   "marca": "iPad",
+   "modelo": "Air 11 M4",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Liquid Retina IPS LCD, 500 nits (typ) · Resolucion: 1640 x 2360 pixels (~264 ppi density) · Procesador: Apple M4 · Sistema: iPadOS 26.3, upgradable to iPadOS 26.4 · Memoria: 128GB 12GB RAM, 256GB 12GB RAM, 512GB 12GB RAM, 1TB 12GB RAM · Camara: 12 MP, f/1.8, (wide), 1/3.0\", 1.22µm, dual pixel PDAF · Selfie: 12 MP, f/2.0, 122˚ (ultrawide) · Bateria: Li-Po 7606 mAh (28.93 Wh) · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2026, March 02 · Resistencia: Stylus support",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/apple/apple-ipad-air-11-2024-2.jpg"
+  },
+  {
+   "idProducto": "IPAD-AIR-13-M4",
+   "marca": "iPad",
+   "modelo": "Air 13 M4",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Liquid Retina IPS LCD, 600 nits (typ) · Resolucion: 2048 x 2732 pixels, 4:3 ratio (~264 ppi density) · Procesador: Apple M4 · Sistema: iPadOS 26.3, upgradable to iPadOS 26.4 · Memoria: 128GB 12GB RAM, 256GB 12GB RAM, 512GB 12GB RAM, 1TB 12GB RAM · Camara: 12 MP, f/1.8, (wide), 1/3.0\", 1.22µm, dual pixel PDAF · Selfie: 12 MP, f/2.0, 122˚ (ultrawide) · Bateria: Li-Po 9705 mAh (36.59 Wh) · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2026, March 02 · Resistencia: Stylus support",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/apple/apple-ipad-air-13-2024-2.jpg"
+  },
+  {
+   "idProducto": "IPAD-PRO-11-M5",
+   "marca": "iPad",
+   "modelo": "Pro 11 M5",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Ultra Retina Tandem OLED, 120Hz, HDR10, Dolby Vision, 1000 nits (HBM), 1600 nits (peak) · Resolucion: 1668 x 2420 pixels, 3:2 ratio (~267 ppi density) · Procesador: Apple M5 · Sistema: iPadOS 26, upgradable to iPadOS 26.4 · Memoria: 256GB 12GB RAM, 512GB 12GB RAM, 1TB 16GB RAM, 2TB 16GB RAM · Camara: 12 MP, f/1.8, (wide), dual pixel PDAF TOF 3D LiDAR scanner (depth) · Selfie: 12 MP, f/2.0, 122˚ (ultrawide) · Bateria: Li-Po 8160 mAh · Carga: 50% in 30 min · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, October 16 · Resistencia: Stylus support",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/apple/apple-ipad-pro-11-2024-2.jpg"
+  },
+  {
+   "idProducto": "IPHONE-17",
+   "marca": "iPhone",
+   "modelo": "17",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: LTPO Super Retina XDR OLED, 120Hz, HDR10, Dolby Vision, 1000 nits (typ), 1600 nits (HBM), 3000 nits (peak) · Resolucion: 1206 x 2622 pixels, 19.5:9 ratio (~460 ppi density) · Procesador: Apple A19 (3 nm) · Sistema: iOS 26, upgradable to iOS 26.3 · Memoria: 256GB 8GB RAM, 512GB 8GB RAM · Camara: 48 MP, f/1.6, 26mm (wide), 1/1.56\", 1.0µm, dual pixel PDAF, sensor-shift OIS 48 MP, f/2.2, 13mm, 120˚ (ultrawide), 1/2.55\", 0.7µm, PDAF · Selfie: 18 MP multi-aspect, f/1.9, 20mm (ultrawide), PDAF SL 3D, (depth/biometrics sensor) · Bateria: Li-Ion 3692 mAh · Carga: Wired, PD3.2, AVS, 50% in 20 min 25W wireless MagSafe/Qi2, 50% in 30 min (15W - China) 4.... · Red: GSM / CDMA / HSPA / EVDO / LTE / 5G · Lanzamiento: 2025, September 09 · Resistencia: IP68 dust tight and water resistant (immersible up to 6m for 30 min) Apple Pay (Visa, Mas...",
+   "imagen": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17.jpg"
+  },
+  {
+   "idProducto": "IPHONE-17-PRO",
+   "marca": "iPhone",
+   "modelo": "17 Pro",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: LTPO Super Retina XDR OLED, 120Hz, HDR10, Dolby Vision, 1000 nits (typ), 1600 nits (HBM), 3000 nits (peak) · Resolucion: 1206 x 2622 pixels, 19.5:9 ratio (~460 ppi density) · Procesador: Apple A19 Pro (3 nm) · Sistema: iOS 26, upgradable to iOS 26.3 · Memoria: 256GB 12GB RAM, 512GB 12GB RAM, 1TB 12GB RAM · Camara: 48 MP, f/1.8, 24mm (wide), 1/1.28\", 1.22µm, dual pixel PDAF, sensor-shift OIS 48 MP, f/2.8, 100mm (periscope telephoto), 1/2.55\", 0.7µm, PDAF, 3D sensor‑shift OIS, 4x optical zoom 48 MP, f/... · Selfie: 18 MP multi-aspect, f/1.9, 20mm (ultrawide), PDAF SL 3D, (depth/biometrics sensor) · Bateria: Market-dependent versions: · Li-Ion 3998 mAh - Nano SIM mod... · Carga: Wired, PD3.2, AVS, 50% in 20 min 25W wireless MagSafe/Qi2, 50% in 30 min (15W - China) 4.... · Red: GSM / CDMA / HSPA / EVDO / LTE / 5G · Lanzamiento: 2025, September 09 · Resistencia: IP68 dust tight and water resistant (immersible up to 6m for 30 min) Apple Pay (Visa, Mas...",
+   "imagen": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro.jpg"
+  },
+  {
+   "idProducto": "IPHONE-17-PRO-MAX",
+   "marca": "iPhone",
+   "modelo": "17 Pro Max",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: LTPO Super Retina XDR OLED, 120Hz, HDR10, Dolby Vision, 1000 nits (typ), 1600 nits (HBM), 3000 nits (peak) · Resolucion: 1320 x 2868 pixels, 19.5:9 ratio (~460 ppi density) · Procesador: Apple A19 Pro (3 nm) · Sistema: iOS 26, upgradable to iOS 26.3 · Memoria: 256GB 12GB RAM, 512GB 12GB RAM, 1TB 12GB RAM, 2TB 12GB RAM · Camara: 48 MP, f/1.8, 24mm (wide), 1/1.28\", 1.22µm, dual pixel PDAF, sensor-shift OIS 48 MP, f/2.8, 100mm (periscope telephoto), 1/2.55\", 0.7µm, PDAF, 3D sensor‑shift OIS, 4x optical zoom 48 MP, f/... · Selfie: 18 MP multi-aspect, f/1.9, 20mm (ultrawide), PDAF SL 3D, (depth/biometrics sensor) · Bateria: Market-dependent versions: · Li-Ion 4823 mAh - Nano SIM mod... · Carga: Wired, PD3.2, AVS, 50% in 20 min 25W wireless MagSafe/Qi2, 50% in 30 min (15W - China) 4.... · Red: GSM / CDMA / HSPA / EVDO / LTE / 5G · Lanzamiento: 2025, September 09 · Resistencia: IP68 dust tight and water resistant (immersible up to 6m for 30 min) Apple Pay (Visa, Mas...",
+   "imagen": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro-max.jpg"
+  },
+  {
+   "idProducto": "MOTOROLA-RAZR-50-ULTRA",
+   "marca": "Motorola",
+   "modelo": "Razr 50 Ultra",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Foldable LTPO AMOLED, 1B colors, Dolby Vision, 165Hz, HDR10+, 3000 nits (peak) · Resolucion: 1080 x 2640 pixels (~413 ppi density) · Procesador: Qualcomm SM8635 Snapdragon 8s Gen 3 (4 nm) · Sistema: Android 14, up to 3 major Android upgrades · Memoria: 256GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM · Camara: 50 MP, f/1.7, 24mm (wide), 1/1.95\", 0.8µm, dual pixel PDAF, OIS 50 MP, f/2.0, 47mm (telephoto), 1/2.76\", 0.64µm, PDAF, 2x optical zoom · Selfie: 32 MP, f/2.4, 25mm (wide), 1/3.14\", 0.7µm · Bateria: 4000 mAh · Carga: 45W wired 15W wireless 5W reverse wired · Red: GSM / CDMA / HSPA / EVDO / LTE / 5G · Lanzamiento: 2024, June 25 · Resistencia: IPX8 water resistant (up to 1.5m for 30 min)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/motorola/motorola-razr-50-ultra-1.jpg"
+  },
+  {
+   "idProducto": "MOTOROLA-G15",
+   "marca": "Motorola",
+   "modelo": "G15",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "",
+   "imagen": ""
+  },
+  {
+   "idProducto": "MOTOROLA-G35-5G",
+   "marca": "Motorola",
+   "modelo": "G35 5G",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: IPS LCD, 120Hz, HDR10, 1000 nits (peak) · Resolucion: 1080 x 2400 pixels, 20:9 ratio (~392 ppi density) · Procesador: Unisoc T760 (6 nm) · Sistema: Android 14 · Memoria: 128GB 4GB RAM, 128GB 8GB RAM, 256GB 4GB RAM, 256GB 8GB RAM · Camara: 50 MP, f/1.8 (wide), 0.64µm, PDAF 8 MP, f/2.2, 120˚ (ultrawide), 1/4.0\", 1.12µm · Selfie: 16 MP, f/2.5, (wide), 1.0µm · Bateria: 5000 mAh · Carga: 18W wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2024, August 29 · Resistencia: Water-repellent design",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g35-5g-leaf-green.jpg"
+  },
+  {
+   "idProducto": "MOTOROLA-G75-5G",
+   "marca": "Motorola",
+   "modelo": "G75 5G",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: IPS LCD, 120Hz, 1000 nits (HBM) · Resolucion: 1080 x 2388 pixels (~387 ppi density) · Procesador: Qualcomm SM6475-AB Snapdragon 6 Gen 3 (4 nm) · Sistema: Android 14, up to 5 major Android upgrades · Memoria: 128GB 8GB RAM, 256GB 8GB RAM · Camara: 50 MP, f/1.8, (wide), 0.8µm, PDAF, OIS 8 MP, f/2.2, 119˚ (ultrawide), 1.12µm, AF · Selfie: 16 MP, f/2.5, (wide), 1.0µm · Bateria: 5000 mAh · Carga: 30W wired, 50% in 25 min 15W wireless · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2024, October 01 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min) MIL-STD-810H compl...",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g75-1.jpg"
+  },
+  {
+   "idProducto": "MOTOROLA-G86-POWER",
+   "marca": "Motorola",
+   "modelo": "G86 Power",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: P-OLED, 1B colors, 144Hz, 1600 nits (peak) · Resolucion: 1080 x 2400 pixels, 20:9 ratio (~395 ppi density) · Procesador: Qualcomm SM7435-AB Snapdragon 7s Gen 2 (4 nm) · Sistema: Android 15, up to 1 major Android upgrade · Memoria: 128GB 8GB RAM, 256GB 8GB RAM · Camara: 50 MP, f/1.9, (wide), 1/1.56\", 1.0µm, multi-directional PDAF, OIS 8 MP, f/2.2, 119˚ (ultrawide), 1/4.0\", 1.12µm, AF · Selfie: 32 MP, f/2.2, (wide), 1/3.14\", 0.7µm · Bateria: 5500 mAh · Carga: 30W wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, July 09 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/motorola/motorola-g96-1.jpg"
+  },
+  {
+   "idProducto": "XIAOMI-PAD-7-PRO",
+   "marca": "Xiaomi Pad",
+   "modelo": "7 Pro",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "",
+   "imagen": ""
+  },
+  {
+   "idProducto": "POCO-X7-PRO",
+   "marca": "Poco",
+   "modelo": "X7 Pro",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: AMOLED, 68B colors, 120Hz, 1920Hz PWM, Dolby Vision, HDR10+, 1400 nits (HBM), 3200 nits (peak) · Resolucion: 1220 x 2712 pixels, 20:9 ratio (~446 ppi density) · Procesador: Mediatek Dimensity 8400 Ultra (4 nm) · Sistema: Android 15, HyperOS 2 · Memoria: 256GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM · Camara: 50 MP, f/1.5, 26mm (wide), 1/1.95\", 0.8µm, PDAF, OIS 8 MP, f/2.2, 15mm (ultrawide), 1/4.0\", 1.12µm · Selfie: 20 MP, f/2.2, 25mm (wide), 1/4.0\", 0.7µm · Bateria: Market-dependent versions: · Si/C Li-Ion 6000 mAh (Global)... · Carga: 90W wired, PD3.0, QC3+, 100% in 42 min Reverse wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, January 09 · Resistencia: IP68/IP69 dust tight and water resistant (high pressure water jets; immersible up to 1.5m...",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-poco-x7-pro-1.jpg"
+  },
+  {
+   "idProducto": "REALME-13-5G",
+   "marca": "Realme",
+   "modelo": "13 5G",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "",
+   "imagen": ""
+  },
+  {
+   "idProducto": "REALME-14-5G",
+   "marca": "Realme",
+   "modelo": "14 5G",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: AMOLED, 120Hz, 2000 nits (peak) · Resolucion: 1080 x 2400 pixels, 20:9 ratio (~395 ppi density) · Procesador: Qualcomm Snapdragon 6 Gen 4 (4 nm) · Sistema: Android 15, Realme UI 6.0 · Memoria: 256GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM · Camara: 50 MP, f/1.8, 27mm (wide), PDAF, OIS · Selfie: 16 MP, f/2.4, 24mm (wide), 1/3.0\" · Bateria: Si/C Li-Ion 6000 mAh · Carga: 45W wired, 50% in 30 min Bypass charging · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, March 27 · Resistencia: IP68/IP69 dust tight and water resistant (high pressure water jets; immersible up to 2.5m...",
+   "imagen": "https://fdn2.gsmarena.com/vv/bigpic/realme-14-5g.jpg"
+  },
+  {
+   "idProducto": "REALME-C71",
+   "marca": "Realme",
+   "modelo": "C71",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: IPS LCD, 120Hz, 725 nits (peak) · Resolucion: 720 x 1604 pixels, 20:9 ratio (~264 ppi density) · Procesador: Unisoc T7250 (12 nm) · Sistema: Android 15, Realme UI 6.0 · Memoria: 64GB 4GB RAM, 128GB 4GB RAM, 128GB 6GB RAM, 128GB 8GB RAM, 256GB 8GB RAM · Camara: 50 MP, f/1.8, 27mm (wide), 1/2.88\", PDAF · Selfie: 5 MP, f/2.2, 27mm (wide), 1/5.0\" · Bateria: Market-dependent versions: · 6000 mAh - Europe · 6300 mAh -... · Carga: 45W wired, 50% in 36 min 6W reverse wired · Red: GSM / HSPA / LTE · Lanzamiento: 2025, June 02 · Resistencia: Dust tight and water resistant (water splashes) Drop resistant up to 1.5m MIL-STD-810H co...",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/realme/realme-c75-5g-1.jpg"
+  },
+  {
+   "idProducto": "REALME-P4-POWER",
+   "marca": "Realme",
+   "modelo": "P4 Power",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: AMOLED, 1B colors, 144Hz, HDR10+, PWM, 600 nits (typ), 1800 nits (HBM), 6500 nits (peak) · Resolucion: 1280 x 2800 pixels, 19.5:9 ratio (~453 ppi density) · Procesador: Mediatek Dimensity 7400 Ultra (4 nm) · Sistema: Android 16, up to 3 major Android upgrades, Realme UI 7.0 · Memoria: 128GB 8GB RAM, 256GB 8GB RAM, 256GB 12GB RAM · Camara: 50 MP, f/1.8, (wide), 1/1.95\", 0.8µm, PDAF, OIS 8 MP, f/2.2, 112˚ (ultrawide), 1/4.0\", 1.12µm · Selfie: 16 MP, f/2.4, (wide) · Bateria: Si/C Li-Ion 10001 mAh · Carga: 80W wired, 55W PPS, 13.5W PD/QC, 50% in 36 min 27W reverse wired Bypass charging · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2026, January 29 · Resistencia: IP69 dust tight and water resistant (high pressure water jets; immersible up to 1.5m for...",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/realme/realme-p4-power-1.jpg"
+  },
+  {
+   "idProducto": "REDMI-15",
+   "marca": "Redmi",
+   "modelo": "15",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: IPS LCD, 400 nits (typ) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~395 ppi density) · Procesador: Mediatek MT6769V/CU Helio G80 (12 nm) · Sistema: Android 10, upgradable to Android 12, MIUI 13 · Memoria: 32GB 3GB RAM, 64GB 4GB RAM, 128GB 4GB RAM, 128GB 6GB RAM · Selfie: 8 MP, f/2.0, 27mm (wide), 1/4.0\", 1.12µm · Bateria: Li-Po 5020 mAh · Carga: 18W wired · Red: GSM / HSPA / LTE · Lanzamiento: 2020, June 10",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-9-0.jpg"
+  },
+  {
+   "idProducto": "REDMI-17",
+   "marca": "Redmi",
+   "modelo": "17",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: IPS LCD, 400 nits (typ) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~395 ppi density) · Procesador: Mediatek MT6769V/CU Helio G80 (12 nm) · Sistema: Android 10, upgradable to Android 12, MIUI 13 · Memoria: 32GB 3GB RAM, 64GB 4GB RAM, 128GB 4GB RAM, 128GB 6GB RAM · Selfie: 8 MP, f/2.0, 27mm (wide), 1/4.0\", 1.12µm · Bateria: Li-Po 5020 mAh · Carga: 18W wired · Red: GSM / HSPA / LTE · Lanzamiento: 2020, June 10",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-9-0.jpg"
+  },
+  {
+   "idProducto": "REDMI-A5",
+   "marca": "Redmi",
+   "modelo": "A5",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: IPS LCD, 120Hz, 450 nits (typ) · Resolucion: 720 x 1640 pixels (~260 ppi density) · Procesador: Unisoc T7250 (12 nm) · Sistema: Android 15 (Go edition), up to 2 major Android upgrades · Memoria: 64GB 3GB RAM, 64GB 4GB RAM, 128GB 4GB RAM, 128GB 6GB RAM · Camara: 32 MP, f/2.0, (wide) Auxiliary lens · Selfie: 8 MP, f/2.0, (wide) · Bateria: 5200 mAh · Carga: 15W wired · Red: GSM / HSPA / LTE · Lanzamiento: 2025, March 21 · Resistencia: Dust and splash resistant",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-a5-4g-4.jpg"
+  },
+  {
+   "idProducto": "REDMI-A7",
+   "marca": "Redmi",
+   "modelo": "A7",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: IPS LCD, 400 nits (typ) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~395 ppi density) · Procesador: Mediatek MT6769V/CU Helio G80 (12 nm) · Sistema: Android 10, upgradable to Android 12, MIUI 13 · Memoria: 32GB 3GB RAM, 64GB 4GB RAM, 128GB 4GB RAM, 128GB 6GB RAM · Selfie: 8 MP, f/2.0, 27mm (wide), 1/4.0\", 1.12µm · Bateria: Li-Po 5020 mAh · Carga: 18W wired · Red: GSM / HSPA / LTE · Lanzamiento: 2020, June 10",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-9-0.jpg"
+  },
+  {
+   "idProducto": "REDMI-A7-PRO",
+   "marca": "Redmi",
+   "modelo": "A7 Pro",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: IPS LCD, 120Hz, 800 nits (HBM) · Resolucion: 720 x 1600 pixels, 20:9 ratio (~254 ppi density) · Procesador: Unisoc T7250 (12 nm) · Sistema: Android 16, HyperOS 3 · Memoria: 64GB 4GB RAM, 128GB 4GB RAM · Camara: 13 MP, f/2.2, (wide), 1/3.06\" Auxiliary lens · Selfie: 8 MP, f/2.0, (wide) · Bateria: 6000 mAh · Carga: 15W wired · Red: GSM / HSPA / LTE · Lanzamiento: 2026, February 27 · Resistencia: Dust and splash resistant",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-a7-pro-1.jpg"
+  },
+  {
+   "idProducto": "REDMI-NOTE-14-PRO-5G",
+   "marca": "Redmi",
+   "modelo": "Note 14 Pro 5G",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: AMOLED, 1B colors, 120Hz, 500 nits (typ), 1000 nits (HBM), 1300 nits (peak) · Resolucion: 1080 x 2400 pixels, 20:9 ratio (~395 ppi density) · Procesador: Mediatek Helio G99 Ultra · Sistema: Android 15, HyperOS · Memoria: 128GB 8GB RAM, 256GB 8GB RAM, 512GB 12GB RAM · Camara: 200 MP, f/1.7, 23mm (wide), 1/1.4\", 0.56µm, multi-directional PDAF, OIS 8 MP, f/2.2, 15mm, 120˚ (ultrawide), 1/4.4\", 1.0µm 2 MP (macro) · Selfie: 16 MP, f/2.4, (wide), 1/3.0\", 1.0µm · Bateria: 5000 mAh · Carga: 67W wired, 50% in 16 min, 100% in 46 min · Red: GSM / HSPA / LTE · Lanzamiento: 2025, March 14 · Resistencia: IP64 dust tight and water resistant (water splashes)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-14s-1.jpg"
+  },
+  {
+   "idProducto": "REDMI-NOTE-15-PRO-PLUS-5G",
+   "marca": "Redmi",
+   "modelo": "Note 15 Pro Plus 5G",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: AMOLED, 68B colors, 120Hz, 3840Hz PWM, HDR10+, Dolby Vision, 1800 nits (HBM), 3200 nits (peak) · Resolucion: 1280 x 2772 pixels, 19.5:9 ratio (~447 ppi density) · Procesador: Mediatek Dimensity 7400 Ultra (4 nm) · Sistema: Android 15, up to 4 major Android upgrades, HyperOS 2 · Memoria: 128GB 8GB RAM, 256GB 8GB RAM, 256GB 12GB RAM, 512GB 8GB RAM, 512GB 12GB RAM · Camara: 200 MP, f/1.7, 23mm (wide), 1/1.4\", 0.56µm, multi-directional PDAF, OIS 8 MP, f/2.2, 15mm, 120˚ (ultrawide), 1/4.0\", 1.12µm · Selfie: 20 MP, f/2.2, 25mm (wide), 1/4.0\", 0.7µm · Bateria: Si/C Li-Ion 6580 mAh · Carga: 45W wired 22.5W reverse wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, December 18 · Resistencia: IP68/IP69K dust tight and water resistant (high pressure water jets; immersible up to 1.5...",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-15-pro-global-1.jpg"
+  },
+  {
+   "idProducto": "REDMI-14C",
+   "marca": "Redmi",
+   "modelo": "14C",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: IPS LCD, 120Hz, 450 nits (typ), 600 nits (HBM) · Resolucion: 720 x 1640 pixels (~260 ppi density) · Procesador: Mediatek Helio G81 Ultra (12 nm) · Sistema: Android 14, HyperOS · Memoria: 64GB 4GB RAM, 128GB 4GB RAM, 128GB 6GB RAM, 128GB 8GB RAM, 256GB 4GB RAM, 256GB 8GB RAM · Camara: 50 MP, f/1.8, 28mm (wide), 1/2.96\", PDAF or 50 MP, f/1.8, 28mm (wide), 1/2.76\", 0.64µm, PDAF Auxiliary lens · Selfie: 13 MP, f/2.0, (wide), 1/3.06\" · Bateria: 5160 mAh · Carga: 18W wired, PD · Red: GSM / HSPA / LTE · Lanzamiento: 2024, August 30 · Resistencia: Dust and splash resistant",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-14c-1.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-A06",
+   "marca": "Samsung",
+   "modelo": "A06",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: PLS LCD · Resolucion: 720 x 1600 pixels, 20:9 ratio (~262 ppi density) · Procesador: Mediatek Helio G85 (12 nm) · Sistema: Android 14, up to 2 major Android upgrades, One UI 8 · Memoria: 64GB 4GB RAM, 128GB 4GB RAM, 128GB 6GB RAM · Camara: 50 MP, f/1.8, (wide), 1/2.76\", 0.64µm, PDAF Auxiliary lens · Selfie: 8 MP, f/2.0, (wide), 1/4.0\", 1.12µm · Bateria: Li-Po 5000 mAh · Carga: 25W wired · Red: GSM / HSPA / LTE · Lanzamiento: 2024, August 16",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a06-11.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-A07",
+   "marca": "Samsung",
+   "modelo": "A07",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: PLS LCD, 120Hz, 650 nits (typ), 800 nits (HBM) · Resolucion: 720 x 1600 pixels, 20:9 ratio (~262 ppi density) · Procesador: Mediatek Dimensity 6300 (6 nm) · Sistema: Android 16, up to 6 major Android upgrades, One UI 8 · Memoria: 64GB 4GB RAM, 128GB 4GB RAM, 128GB 6GB RAM · Camara: 50 MP, f/1.8, (wide), PDAF Auxiliary lens · Selfie: 8 MP, f/2.0, 26mm (wide), 1/4.0\", 1.12µm · Bateria: Li-Ion 6000 mAh · Carga: 25W wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2026, January 13 · Resistencia: IP54 dust protected and water resistant (water splashes)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a07-5g-1.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-A16",
+   "marca": "Samsung",
+   "modelo": "A16",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Super AMOLED, 90Hz · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~385 ppi density) · Procesador: Mediatek Helio G99 (6 nm) · Sistema: Android 14, up to 6 major Android upgrades, One UI 8 · Memoria: 128GB 4GB RAM, 128GB 6GB RAM, 128GB 8GB RAM, 256GB 4GB RAM, 256GB 6GB RAM, 256GB 8GB RAM · Camara: 50 MP, f/1.8, (wide), 1/2.76\", 0.64µm, AF 5 MP, f/2.2, (ultrawide), 1/5.0\", 1.12µm 2 MP (macro) · Selfie: 13 MP, f/2.0, (wide), 1/3.1\", 1.12µm · Bateria: 5000 mAh · Carga: 25W wired · Red: GSM / HSPA / LTE · Lanzamiento: 2024, October 15 · Resistencia: IP54 dust protected and water resistant (water splashes)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a16-lte-1.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-A17",
+   "marca": "Samsung",
+   "modelo": "A17",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Super AMOLED, 90Hz, 800 nits (HBM) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~385 ppi density) · Procesador: Exynos 1330 (5 nm) · Sistema: Android 15, up to 6 major Android upgrades, One UI 7 · Memoria: 128GB 4GB RAM, 128GB 6GB RAM, 128GB 8GB RAM, 256GB 4GB RAM, 256GB 8GB RAM · Camara: 50 MP, f/1.8, (wide), 1/2.76\", 0.64µm, AF, OIS 5 MP, f/2.2, (ultrawide), 1/5.0\", 1.12µm 2 MP (macro) · Selfie: 13 MP, f/2.0, (wide), 1/3.1\", 1.12µm · Bateria: 5000 mAh · Carga: 25W wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, August 06 · Resistencia: IP54 dust protected and water resistant (water splashes)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a17-5g-12.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-A26",
+   "marca": "Samsung",
+   "modelo": "A26",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Super AMOLED, 120Hz · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~385 ppi density) · Procesador: Exynos 1380 (5 nm) - Global Exynos 1280 (5 nm) - LATAM · Sistema: Android 15, up to 6 major Android upgrades, One UI 8.5 · Memoria: 128GB 4GB RAM, 128GB 6GB RAM, 128GB 8GB RAM, 256GB 6GB RAM, 256GB 8GB RAM · Camara: 50 MP, f/1.8, 27mm (wide), 1/2.76\", 0.64µm, PDAF, OIS 8 MP, f/2.2, 120˚ (ultrawide), 1/4.0\", 1.12µm 2 MP (macro) · Selfie: 13 MP, f/2.2, (wide), 1/3.06\", 1.12µm · Bateria: 5000 mAh · Carga: 25W wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, March 02 · Resistencia: IP67 dust/water resistant (up to 1m for 30 min)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a26-1.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-A37",
+   "marca": "Samsung",
+   "modelo": "A37",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Super AMOLED+, 120Hz, HDR10+, 1200 nits (HBM), 1900 nits (peak) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~385 ppi density) · Procesador: Exynos 1680 (4 nm) · Sistema: Android 16, up to 6 major Android upgrades, One UI 8.5 · Memoria: 128GB 8GB RAM, 256GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM · Camara: 50 MP, f/1.8, (wide), 1/1.56\", 1.0µm, PDAF, OIS 12 MP, f/2.2, 13mm (ultrawide), 1/3.06\", 1.12µm 5 MP, f/2.4, (macro) · Selfie: 12 MP, f/2.2, (wide), 1/3.2\", 1.12µm · Bateria: 5000 mAh · Carga: 45W wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2026, March 25 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a57-4.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-A56",
+   "marca": "Samsung",
+   "modelo": "A56",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Super AMOLED, 120Hz, HDR10+, 1200 nits (HBM), 1900 nits (peak) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~385 ppi density) · Procesador: Exynos 1580 (4 nm) · Sistema: Android 15, up to 6 major Android upgrades, One UI 7 · Memoria: 128GB 6GB RAM, 128GB 8GB RAM, 256GB 6GB RAM, 256GB 8GB RAM, 256GB 12GB RAM · Camara: 50 MP, f/1.8, (wide), 1/1.56\", 1.0µm, PDAF, OIS 12 MP, f/2.2, 123˚ (ultrawide), 1/3.06\", 1.12µm 5 MP, f/2.4, (macro) · Selfie: 12 MP, f/2.2, (wide) · Bateria: 5000 mAh · Carga: 45W wired, 65% in 30 min, 100% in 68 min · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, March 02 · Resistencia: IP67 dust/water resistant (up to 1m for 30 min)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a56-1.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-A57",
+   "marca": "Samsung",
+   "modelo": "A57",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Super AMOLED+, 120Hz, HDR10+, 1200 nits (HBM), 1900 nits (peak) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~385 ppi density) · Procesador: Exynos 1680 (4 nm) · Sistema: Android 16, up to 6 major Android upgrades, One UI 8.5 · Memoria: 128GB 8GB RAM, 256GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM · Camara: 50 MP, f/1.8, (wide), 1/1.56\", 1.0µm, PDAF, OIS 12 MP, f/2.2, 13mm (ultrawide), 1/3.06\", 1.12µm 5 MP, f/2.4, (macro) · Selfie: 12 MP, f/2.2, (wide), 1/3.2\", 1.12µm · Bateria: 5000 mAh · Carga: 45W wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2026, March 25 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a57-4.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-S25-FE",
+   "marca": "Samsung",
+   "modelo": "S25 Fe",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Dynamic LTPO AMOLED 2X, 120Hz, HDR10+, 1900 nits (peak) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~385 ppi density) · Procesador: Exynos 2400 (4 nm) · Sistema: Android 16, up to 7 major Android upgrades, One UI 8 · Memoria: 128GB 8GB RAM, 256GB 8GB RAM, 512GB 8GB RAM · Camara: 50 MP, f/1.8, 24mm (wide), 1/1.57\", 1.0µm, dual pixel PDAF, OIS 8 MP, f/2.4, 75mm (telephoto), 1/4.4\", 1.0µm, PDAF, OIS, 3x optical zoom 12 MP, f/2.2, 13mm, 123˚ (ultrawide), 1/3.0\", 1.12µm · Selfie: 12 MP, f/2.2, 26mm (wide), 1/3.2\", 1.12µm · Bateria: 4900 mAh · Carga: 45W wired, PD, QC2, 65% in 30 min 15W wireless, Qi2 compatible Reverse wireless · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, September 04 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min) Enhanced armor alu...",
+   "imagen": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s25-fe.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-S25-ULTRA",
+   "marca": "Samsung",
+   "modelo": "S25 Ultra",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Dynamic LTPO AMOLED 2X, 120Hz, HDR10+, 2600 nits (peak) · Resolucion: 1440 x 3120 pixels, 19.5:9 ratio (~498 ppi density) · Procesador: Qualcomm SM8750-AC Snapdragon 8 Elite (3 nm) · Sistema: Android 15, up to 7 major Android upgrades, One UI 8 · Memoria: 256GB 12GB RAM, 512GB 12GB RAM, 1TB 12GB RAM, 1TB 16GB RAM · Selfie: 12 MP, f/2.2, 26mm (wide), 1/3.2\", 1.12µm, dual pixel PDAF · Bateria: Li-Ion 5000 mAh · Carga: 45W wired, PD3.0, 65% in 30 min 15W wireless (Qi2 Ready) 4.5W reverse wireless · Red: GSM / CDMA / HSPA / EVDO / LTE / 5G · Lanzamiento: 2025, January 22 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min) Stylus",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s25-ultra-sm-s938-1.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-S26",
+   "marca": "Samsung",
+   "modelo": "S26",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Dynamic LTPO AMOLED 2X, 120Hz, HDR10+, 2600 nits (peak) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~411 ppi density) · Procesador: Qualcomm SM8850-1-AD Snapdragon 8 Elite Gen 5 (3 nm) - US/CN Exynos 2600 (2 nm) - ROW · Sistema: Android 16, up to 7 major Android upgrades, One UI 8.5 · Memoria: 256GB 12GB RAM, 512GB 12GB RAM · Camara: 50 MP, f/1.8, 24mm (wide), 1/1.56\", 1.0µm, dual pixel PDAF, OIS 10 MP, f/2.4, 67mm (telephoto), 1/3.94\", 1.0µm, PDAF, OIS, 3x optical zoom 12 MP, f/2.2, 13mm, 120˚ (ultrawide), 1/2.55\" 1.4µ... · Selfie: 12 MP, f/2.2, 26mm (wide), 1/3.2\", 1.12µm, dual pixel PDAF · Bateria: Li-Ion 4300 mAh · Carga: 25W wired, PD3.0, 55% in 30 min 15W wireless (Qi2 Ready) 4.5W reverse wireless · Red: GSM / CDMA / HSPA / EVDO / LTE / 5G · Lanzamiento: 2026, February 25 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min) Armor aluminum 2 f...",
+   "imagen": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s26.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-S26-ULTRA",
+   "marca": "Samsung",
+   "modelo": "S26 Ultra",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Dynamic LTPO AMOLED 2X, 120Hz, HDR10+, 2600 nits (peak) · Resolucion: 1440 x 3120 pixels, 19.5:9 ratio (~500 ppi density) · Procesador: Qualcomm SM8850-1-AD Snapdragon 8 Elite Gen 5 (3 nm) · Sistema: Android 16, up to 7 major Android upgrades, One UI 8.5 · Memoria: 256GB 12GB RAM, 512GB 12GB RAM, 1TB 16GB RAM · Selfie: 12 MP, f/2.2, 26mm (wide), 1/3.2\", 1.12µm, dual pixel PDAF · Bateria: Li-Ion 5000 mAh · Carga: 60W wired, PD3.0, 75% in 30 min 25W wireless (Qi2.2) 4.5W reverse wireless · Red: GSM / CDMA / HSPA / EVDO / LTE / 5G · Lanzamiento: 2026, February 25 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min) Stylus Armor alumi...",
+   "imagen": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s26-ultra-new.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-S26-PLUS",
+   "marca": "Samsung",
+   "modelo": "S26 Plus",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Dynamic LTPO AMOLED 2X, 120Hz, HDR10+, 2600 nits (peak) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~411 ppi density) · Procesador: Qualcomm SM8850-1-AD Snapdragon 8 Elite Gen 5 (3 nm) - US/CN Exynos 2600 (2 nm) - ROW · Sistema: Android 16, up to 7 major Android upgrades, One UI 8.5 · Memoria: 256GB 12GB RAM, 512GB 12GB RAM · Camara: 50 MP, f/1.8, 24mm (wide), 1/1.56\", 1.0µm, dual pixel PDAF, OIS 10 MP, f/2.4, 67mm (telephoto), 1/3.94\", 1.0µm, PDAF, OIS, 3x optical zoom 12 MP, f/2.2, 13mm, 120˚ (ultrawide), 1/2.55\" 1.4µ... · Selfie: 12 MP, f/2.2, 26mm (wide), 1/3.2\", 1.12µm, dual pixel PDAF · Bateria: Li-Ion 4300 mAh · Carga: 25W wired, PD3.0, 55% in 30 min 15W wireless (Qi2 Ready) 4.5W reverse wireless · Red: GSM / CDMA / HSPA / EVDO / LTE / 5G · Lanzamiento: 2026, February 25 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min) Armor aluminum 2 f...",
+   "imagen": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s26.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-S22-PLUS",
+   "marca": "Samsung",
+   "modelo": "S22 Plus",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Dynamic AMOLED 2X, 120Hz, HDR10+, 1300 nits (peak) · Resolucion: 1080 x 2340 pixels, 19.5:9 ratio (~425 ppi density) · Procesador: Exynos 2200 (4 nm) - Europe Qualcomm SM8450 Snapdragon 8 Gen 1 (4 nm) - ROW · Sistema: Android 12, up to 4 major Android upgrades, One UI 8 · Memoria: 128GB 8GB RAM, 256GB 8GB RAM · Camara: 50 MP, f/1.8, 23mm (wide), 1/1.56\", 1.0µm, dual pixel PDAF, OIS 10 MP, f/2.4, 70mm (telephoto), 1/3.94\", 1.0µm, PDAF, OIS, 3x optical zoom 12 MP, f/2.2, 13mm, 120˚ (ultrawide), 1/2.55\" 1.4µ... · Selfie: 10 MP, f/2.2, 26mm (wide), 1/3.24\", 1.22µm, dual pixel PDAF · Bateria: Li-Ion 3700 mAh · Carga: 25W wired, PD3.0 15W wireless (Qi) 4.5W reverse wireless · Red: GSM / CDMA / HSPA / EVDO / LTE / 5G · Lanzamiento: 2022, February 09 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min) Armor aluminum fra...",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s22-5g-2.jpg"
+  },
+  {
+   "idProducto": "SAMSUNG-S21-PLUS",
+   "marca": "Samsung",
+   "modelo": "S21 Plus",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: Dynamic AMOLED 2X, 120Hz, HDR10+, 1300 nits (peak) · Resolucion: 1080 x 2400 pixels, 20:9 ratio (~421 ppi density) · Procesador: Exynos 2100 (5 nm) - International Qualcomm SM8350 Snapdragon 888 5G (5 nm) · Sistema: Android 11, up to 4 major Android upgrades, One UI 6.1 · Memoria: 128GB 8GB RAM, 256GB 8GB RAM · Camara: 12 MP, f/1.8, 26mm (wide), 1/1.76\", 1.8µm, dual pixel PDAF, OIS 64 MP, f/2.0, 29mm (telephoto), 1/1.72\", 0.8µm, PDAF, OIS, 1.1x optical zoom, 3x hybrid zoom 12 MP, f/2.2, 13mm, 120˚ (ultraw... · Selfie: 10 MP, f/2.2, 26mm (wide), 1/3.24\", 1.22µm, dual pixel PDAF · Bateria: Li-Ion 4000 mAh · Carga: 25W wired, PD3.0 15W wireless (Qi) 4.5W reverse wireless · Red: GSM / CDMA / HSPA / EVDO / LTE · Lanzamiento: Not announced yet · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s21-5g-0.jpg"
+  },
+  {
+   "idProducto": "XIAOMI-17",
+   "marca": "Xiaomi",
+   "modelo": "17",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: LTPO AMOLED, 68B colors, 2160Hz PWM, 120Hz, Dolby Vision, HDR Vivid, HDR10+, 3500 nits (peak) · Resolucion: 1220 x 2656 pixels, 19.5:9 ratio (~460 ppi density) · Procesador: Qualcomm SM8850-AC Snapdragon 8 Elite Gen 5 (3 nm) · Sistema: Android 16, HyperOS 3 · Memoria: 256GB 12GB RAM, 512GB 12GB RAM, 512GB 16GB RAM, 1TB 16GB RAM · Camara: 50 MP, f/1.7, 23mm (wide), 1/1.31\", 1.2µm, dual pixel PDAF, OIS 50 MP, f/2.0, 60mm (telephoto), 1/2.76\", 0.64µm, PDAF (10cm - ∞), OIS, 2.6x optical zoom 50 MP, f/2.4, 17mm, 102˚ (ultrawide)... · Selfie: 50 MP, f/2.2, 21mm (wide), 1/2.88\", 0.61µm, PDAF · Bateria: Si/C Li-Ion 6330 mAh - Global Si/C Li-Ion 7000 mAh - China · Carga: 100W wired, PD3.0, QC3+, 100W PPS 50W wireless 22.5W reverse wireless 22.5W reverse wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, September 25 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min)",
+   "imagen": "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-17.jpg"
+  },
+  {
+   "idProducto": "XIAOMI-17-ULTRA",
+   "marca": "Xiaomi",
+   "modelo": "17 Ultra",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: LTPO AMOLED, 68B colors, 120Hz, 2160Hz PWM, Dolby Vision, HDR10+, 3500 nits (peak) · Resolucion: 1200 x 2608 pixels, 19.5:9 ratio (~416 ppi density) · Procesador: Qualcomm SM8850-AC Snapdragon 8 Elite Gen 5 (3 nm) · Sistema: Android 16, HyperOS 3 · Memoria: 512GB 16GB RAM, 1TB 16GB RAM · Camara: 50 MP, f/1.7, 23mm (wide), 1.0\"-type, 1.6µm, dual pixel PDAF, OIS 200 MP, f/2.4-3.0, 75-100mm (periscope telephoto), 1/1.4\", 0.56µm, multi-directional PDAF (30cm - ∞), OIS, 3.2-4.3x continu... · Selfie: 50 MP, f/2.2, 21mm (wide), 1/2.7\", 0.61µm, AF · Bateria: Si/C Li-Ion 6000 mAh · Carga: 90W wired, 90W PPS, PD3.0, QC3+ 50W wireless 22.5W reverse wired 10W reverse wireless · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2026, February 28 · Resistencia: IP68/IP69 dust tight and water resistant (high pressure water jets; immersible up to 6m f...",
+   "imagen": "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-17-ultra-global.jpg"
+  },
+  {
+   "idProducto": "XIAOMI-PAD-7",
+   "marca": "Xiaomi",
+   "modelo": "Pad 7",
+   "precioRefUsdCents": 0,
+   "caracteristicas": "Pantalla: LTPO AMOLED, 68B colors, 2160Hz PWM, 120Hz, Dolby Vision, HDR Vivid, HDR10+, 3500 nits (peak) · Resolucion: 1220 x 2656 pixels, 19.5:9 ratio (~460 ppi density) · Procesador: Qualcomm SM8850-AC Snapdragon 8 Elite Gen 5 (3 nm) · Sistema: Android 16, HyperOS 3 · Memoria: 256GB 12GB RAM, 512GB 12GB RAM, 512GB 16GB RAM, 1TB 16GB RAM · Camara: 50 MP, f/1.7, 23mm (wide), 1/1.31\", 1.2µm, dual pixel PDAF, OIS 50 MP, f/2.0, 60mm (telephoto), 1/2.76\", 0.64µm, PDAF (10cm - ∞), OIS, 2.6x optical zoom 50 MP, f/2.4, 17mm, 102˚ (ultrawide)... · Selfie: 50 MP, f/2.2, 21mm (wide), 1/2.88\", 0.61µm, PDAF · Bateria: Si/C Li-Ion 6330 mAh - Global Si/C Li-Ion 7000 mAh - China · Carga: 100W wired, PD3.0, QC3+, 100W PPS 50W wireless 22.5W reverse wireless 22.5W reverse wired · Red: GSM / HSPA / LTE / 5G · Lanzamiento: 2025, September 25 · Resistencia: IP68 dust tight and water resistant (immersible up to 1.5m for 30 min)",
+   "imagen": "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-17-b.jpg"
+  }
+ ]
+}

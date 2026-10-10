@@ -166,6 +166,22 @@ test('diagnostico devuelve 4 pasos y marca los que faltan', async function () {
   assert.equal(d.pasos[3].ok, true);
 });
 
+test('diagnostico marca el paso 3 como FALLIDO si el script desplegado usa la hoja vieja', async function () {
+  // El script puede responder bien y aun asi ser el Codigo.gs viejo. Si el
+  // diagnostico lo da por bueno, el dueño siembra la hoja que ya no existe.
+  globalThis.fetch = async function (url) {
+    if (String(url).indexOf('action=SALUD') !== -1 && String(url).indexOf('SALUD_TIENDA') === -1) {
+      return new Response(JSON.stringify(
+        { ok: true, version: 1, hoja: 'Catalogo', esLegacy: true }), { status: 200 });
+    }
+    return new Response(JSON.stringify({ status: 'OK' }), { status: 200 });
+  };
+  const d = await s.diagnostico();
+  assert.equal(d.pasos[2].ok, false, 'un deployment con la hoja vieja no es un despliegue bueno');
+  assert.match(d.pasos[2].detalle, /Catalogo/);
+  assert.match(d.pasos[2].accion, /Codigo.gs nuevo/);
+});
+
 test('diagnostico marca el paso 3 como fallido si el script no responde', async function () {
   globalThis.fetch = async function () { throw new Error('sin red'); };
   const d = await s.diagnostico();

@@ -148,8 +148,11 @@ function crearEntorno(opciones) {
   contexto.globalThis = contexto;
 
   vm.createContext(contexto);
-  const fuente = fs.readFileSync(
+  let fuente = fs.readFileSync(
     path.join(__dirname, '..', 'apps-script', 'Code.gs'), 'utf8');
+  // config.fuente transforma el Codigo.gs antes de correrlo: asi el arnes puede
+  // simular un deployment VIEJO (por ejemplo, con la hoja Catalogo) sin tocar el real.
+  if (config.fuente) fuente = config.fuente(fuente);
   vm.runInContext(fuente, contexto, { filename: 'Code.gs' });
 
   return { contexto: contexto, hojas: hojas, registro: registro, ss: ss,

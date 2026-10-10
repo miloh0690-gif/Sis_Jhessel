@@ -87,6 +87,25 @@ test('SALUD responde sin clave: sirve para saber si el script esta desplegado', 
   assert.ok(r.hora);
 });
 
+test('SALUD dice que version es y que hoja de precios usa: para saber si el', () => {
+  // script desplegado esta desactualizado sin depender de la clave compartida.
+  const entorno = crearEntorno();
+  const r = get(entorno, { action: 'SALUD' });
+  assert.equal(r.version, 2, 'la version sube para distinguir un deployment viejo');
+  assert.equal(r.hoja, 'Precios', 'dice la hoja de precios, no la de inventario vieja');
+  assert.equal(r.esLegacy, false);
+});
+
+test('SALUD marca esLegacy cuando la hoja todavia se llama Catalogo', () => {
+  // Simula un deployment viejo: el mismo Codigo.gs con la hoja Catalogo.
+  const entorno = crearEntorno({
+    fuente: function (s) { return s.replace("'Precios'", "'Catalogo'"); }
+  });
+  const r = get(entorno, { action: 'SALUD' });
+  assert.equal(r.hoja, 'Catalogo');
+  assert.equal(r.esLegacy, true, 'asi el diagnostico puede decir que pegue el Codigo.gs nuevo');
+});
+
 test('una lectura sin clave responde NO_AUTORIZADO y no escribe nada', () => {
   const entorno = crearEntorno();
   const r = get(entorno, { action: 'REPORTE_VENTAS' });

@@ -223,8 +223,22 @@ async function diagnostico() {
     try {
       const s = await salud();
       pasos[2].ok = Boolean(s && s.ok);
-      pasos[2].detalle = s && s.ok ? 'El script responde. Version ' + String(s.version || '?') + '.' : 'El script respondio algo raro.';
-      pasos[2].accion = s && s.ok ? 'Ninguna.' : 'En Apps Script: Implementar > Nueva implementacion. Sin nueva version, /exec sirve el codigo viejo.';
+      if (s && s.ok) {
+        pasos[2].detalle = 'El script responde. Version ' + String(s.version || '?') +
+          (s.hoja ? ', hoja de precios "' + String(s.hoja) + '".' : '.');
+        // El script puede estar desplegado y aun asi ser el codigo viejo: sin esto
+        // el diagnostico daba luz verde con una hoja que ya no existe.
+        pasos[2].ok = s.esLegacy !== true;
+        if (s.esLegacy === true) {
+          pasos[2].detalle += ' Es una version vieja.';
+          pasos[2].accion = 'Pega el Codigo.gs nuevo (la hoja se llama Precios, no Catalogo) y hace una Nueva implementacion.';
+        } else {
+          pasos[2].accion = 'Ninguna.';
+        }
+      } else {
+        pasos[2].detalle = 'El script respondio algo raro.';
+        pasos[2].accion = 'En Apps Script: Implementar > Nueva implementacion. Sin nueva version, /exec sirve el codigo viejo.';
+      }
     } catch (e) {
       pasos[2].detalle = 'El script no responde: ' + e.message;
       pasos[2].accion = 'En Apps Script: Implementar > Nueva implementacion. Sin nueva version, /exec sigue sirviendo el codigo viejo. Revisa tambien que el acceso sea "Cualquier persona".';

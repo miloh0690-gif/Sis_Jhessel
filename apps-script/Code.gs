@@ -34,7 +34,7 @@ var NOMBRE_HOJA_TCDIA = 'TcDia';
 
 var CANTIDAD_MAXIMA_SEMBRADO = 200;
 var ESPERA_LOCK_MS = 15000;
-var VERSION_SERVICIO = 1;
+var VERSION_SERVICIO = 2;
 
 // --- encabezados ------------------------------------------------------------
 //
@@ -408,7 +408,9 @@ function doGet(e) {
     return responderJSON({
       ok: true,
       hora: ahoraIso(),
-      version: VERSION_SERVICIO
+      version: VERSION_SERVICIO,
+      hoja: NOMBRE_HOJA_CATALOGO,
+      esLegacy: NOMBRE_HOJA_CATALOGO !== 'Precios'
     });
   }
 

@@ -192,8 +192,17 @@ async function salud() {
   const temporizador = setTimeout(function () { controlador.abort(); }, TIMEOUT_MS);
   try {
     const respuesta = await fetch(construirUrl(false) + (construirUrl(false).indexOf('?') !== -1 ? '&' : '?') + 'action=SALUD', { signal: controlador.signal });
-    return await respuesta.json();
+    // Google devuelve 403 con su pagina de "Acceso denegado" cuando el
+    // despliegue no es publico. Sin esto el diagnostico dice "no responde" y
+    // manda a revisar el deploy en vez de los permisos de acceso.
+    const crudo = await respuesta.text();
+    if (esAccesoDenegado(null, crudo, respuesta.status)) {
+      throw error(MENSAJE_ACCESO, 502);
+    }
+    return crudo ? JSON.parse(crudo) : null;
   } catch (e) {
+    if (e && e.codigo) throw e;
+    if (e && e.name === 'AbortError') throw error('El script de Google Sheets tardo demasiado.', 504);
     throw error('El script de Google Sheets no responde.', 502);
   } finally {
     clearTimeout(temporizador);

@@ -106,6 +106,31 @@ test('SALUD marca esLegacy cuando la hoja todavia se llama Catalogo', () => {
   assert.equal(r.esLegacy, true, 'asi el diagnostico puede decir que pegue el Codigo.gs nuevo');
 });
 
+test('SALUD dice el nombre del libro: para ver si estamos en la hoja correcta', () => {
+  const entorno = crearEntorno({ nombreLibro: 'JHessel Bolivia' });
+  const r = get(entorno, { action: 'SALUD' });
+  assert.equal(r.libro, 'JHessel Bolivia',
+    'sin esto no hay forma de saber si escribe en la hoja que el dueno esta viendo');
+});
+
+test('con SPREADSHEET_ID el script abre SIEMPRE ese libro, no el que este abierto', () => {
+  const entorno = crearEntorno({ spreadsheetId: '1AbCdEf' });
+  get(entorno, { action: 'SALUD' });
+  assert.deepEqual(entorno.abiertos, ['1AbCdEf'],
+    'getActiveSpreadsheet() devuelve el libro equivocado si el script no esta vinculado');
+});
+
+test('sin libro disponible la escritura dice que falta la hoja, en vez de "guardado"', () => {
+  const entorno = crearEntorno({ sinLibroActivo: true, clave: CLAVE });
+  const r = post(entorno, {
+    tipoOperacion: 'GUARDAR_TIENDA',
+    tienda: { idTienda: 'T1', nombre: 'T', pctComision: 30, activa: true }
+  });
+  assert.equal(r.status, 'ERROR');
+  assert.match(r.message, /SPREADSHEET_ID|hoja de trabajo/,
+    'sin este aviso el dueno creeria que guardo una tienda que no existe');
+});
+
 test('una lectura sin clave responde NO_AUTORIZADO y no escribe nada', () => {
   const entorno = crearEntorno();
   const r = get(entorno, { action: 'REPORTE_VENTAS' });

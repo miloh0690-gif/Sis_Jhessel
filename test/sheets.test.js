@@ -152,7 +152,8 @@ test('un abort por timeout se distingue de un no-contacto', async function () {
 test('diagnostico devuelve 4 pasos y marca los que faltan', async function () {
   globalThis.fetch = async function (url) {
     if (String(url).indexOf('action=SALUD') !== -1 && String(url).indexOf('SALUD_TIENDA') === -1) {
-      return new Response(JSON.stringify({ ok: true, version: 4 }), { status: 200 });
+      return new Response(JSON.stringify(
+        { ok: true, version: 4, hoja: 'Precios', libro: 'JHessel Bolivia' }), { status: 200 });
     }
     return new Response(JSON.stringify({ status: 'OK' }), { status: 200 });
   };
@@ -163,6 +164,8 @@ test('diagnostico devuelve 4 pasos y marca los que faltan', async function () {
   assert.equal(d.pasos[1].ok, true);
   assert.equal(d.pasos[2].ok, true);
   assert.match(d.pasos[2].detalle, /Version 4/);
+  assert.match(d.pasos[2].detalle, /JHessel Bolivia/,
+    'el diagnostico tiene que decir en que hoja estamos, o el dueno no puede verificar nada');
   assert.equal(d.pasos[3].ok, true);
 });
 

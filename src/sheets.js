@@ -225,7 +225,8 @@ async function diagnostico() {
       pasos[2].ok = Boolean(s && s.ok);
       if (s && s.ok) {
         pasos[2].detalle = 'El script responde. Version ' + String(s.version || '?') +
-          (s.hoja ? ', hoja de precios "' + String(s.hoja) + '".' : '.');
+          (s.hoja ? ', hoja de precios "' + String(s.hoja) + '".' : '.') +
+          (s.libro ? ' Libro: "' + String(s.libro) + '".' : '');
         // El script puede estar desplegado y aun asi ser el codigo viejo: sin esto
         // el diagnostico daba luz verde con una hoja que ya no existe.
         pasos[2].ok = s.esLegacy !== true;

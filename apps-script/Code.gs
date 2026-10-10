@@ -316,8 +316,29 @@ function reportar(ss, nombreHoja, filtros, filtroFn) {
   return { cabeceras: cabeceras, filas: filas };
 }
 
+// El libro con el que trabajamos SIEMPRE es el mismo, no el que este abierto.
+// getActiveSpreadsheet() devuelve null o el equivocado cuando el script no esta
+// vinculado a una hoja, y ahi las ventas se pierden sin avisar.
+function libroDeTrabajo() {
+  var id = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
+  if (id) {
+    try { return SpreadsheetApp.openById(String(id).trim()); }
+    catch (e) { Logger.log('No se pudo abrir SPREADSHEET_ID ' + id + ': ' + e); }
+  }
+  return SpreadsheetApp.getActiveSpreadsheet();
+}
+
+function nombreDelLibro() {
+  try {
+    var libro = libroDeTrabajo();
+    return libro && libro.getName ? String(libro.getName()) : '(sin nombre)';
+  } catch (e) {
+    return '(no se pudo leer)';
+  }
+}
+
 function encabezadosDe(nombreHoja) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = libroDeTrabajo();
   var hoja = ss.getSheetByName(nombreHoja);
   if (!hoja) return ENCABEZADOS_POR_HOJA[nombreHoja] || [];
   return encabezadosDeHoja(hoja);
@@ -369,7 +390,7 @@ function filtrarVentas(filtros) {
 }
 
 function despacharLectura(accion, parametros) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = libroDeTrabajo();
   switch (accion) {
     case 'REPORTE_TIENDAS':
       return reportar(ss, NOMBRE_HOJA_TIENDAS, parametros, null);
@@ -410,7 +431,8 @@ function doGet(e) {
       hora: ahoraIso(),
       version: VERSION_SERVICIO,
       hoja: NOMBRE_HOJA_CATALOGO,
-      esLegacy: NOMBRE_HOJA_CATALOGO !== 'Precios'
+      esLegacy: NOMBRE_HOJA_CATALOGO !== 'Precios',
+      libro: nombreDelLibro()
     });
   }
 
@@ -422,7 +444,7 @@ function doGet(e) {
     // lo usa para saber si SHEETS_API_KEY coincide, asi que tiene que existir.
     // No devuelve datos de la hoja, solo el conteo.
     if (accion === 'SALUD_TIENDA') {
-      var hojaVentas = obtenerHoja(SpreadsheetApp.getActiveSpreadsheet(),
+      var hojaVentas = obtenerHoja(libroDeTrabajo(),
         NOMBRE_HOJA_VENTAS, encabezadosDe(NOMBRE_HOJA_VENTAS));
       var filas = hojaVentas.getLastRow() < 2 ? 0 : hojaVentas.getLastRow() - 1;
       return responderJSON({
@@ -475,6 +497,12 @@ function doPost(e) {
   }
 
   try {
+    // Si el script no esta vinculado a una hoja, escribir sin libro fijo
+    // falla por dentro y el dueno ve "guardado" sin haber guardado nada.
+    if (!libroDeTrabajo()) {
+      return responderError('El script no tiene hoja de trabajo. Vinculalo a tu hoja ' +
+        'o poné el SPREADSHEET_ID en las propiedades del script.');
+    }
     return responderJSON(despacharEscritura(String(datos.tipoOperacion || ''), datos));
   } catch (error) {
     return responderError(error && error.message ? error.message : error);

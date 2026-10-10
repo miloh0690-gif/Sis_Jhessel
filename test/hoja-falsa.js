@@ -94,10 +94,14 @@ function crearEntorno(opciones) {
   const clave = config.clave === undefined ? CLAVE : config.clave;
   const hojas = config.hojas || {};
   const registro = [];
+  const abiertos = [];
   // Propiedades del script: arrancan con la clave puesta, como si el dueño ya
   // la hubiera configurado. El arnes de generarClaveCompartida() la escribe.
   const propiedades = { SHEETS_API_KEY: clave };
+  if (config.spreadsheetId) propiedades.SPREADSHEET_ID = config.spreadsheetId;
+  const idSinAbrir = config.idSinAbrir === true;
   const ss = {
+    getName: function () { return config.nombreLibro || 'JHessel en pruebas'; },
     getSheetByName: function (nombre) { return hojas[nombre] || null; },
     insertSheet: function (nombre) {
       hojas[nombre] = crearHoja(nombre);
@@ -107,7 +111,14 @@ function crearEntorno(opciones) {
 
   const contexto = {
     SpreadsheetApp: {
-      getActiveSpreadsheet: function () { return ss; }
+      getActiveSpreadsheet: function () { return config.sinLibroActivo ? null : ss; },
+      // openById es lo que permite fijar SIEMPRE el mismo libro. Si el script no
+      // esta vinculado a una hoja, getActiveSpreadsheet() devuelve el equivocado.
+      openById: function (id) {
+        abiertos.push(String(id));
+        if (idSinAbrir) return null;
+        return ss;
+      }
     },
     PropertiesService: {
       getScriptProperties: function () {
@@ -156,7 +167,7 @@ function crearEntorno(opciones) {
   vm.runInContext(fuente, contexto, { filename: 'Code.gs' });
 
   return { contexto: contexto, hojas: hojas, registro: registro, ss: ss,
-    propiedades: propiedades };
+    propiedades: propiedades, abiertos: abiertos };
 }
 
 function respuesta(objeto) {

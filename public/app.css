@@ -1,287 +1,188 @@
+/* Sis Jhessel — partes de la hoja de estilo que Tailwind no cubre solo.
+   La paleta y los tipos salen de la configuracion de Tailwind que esta en
+   index.html; aqui queda lo que necesita javascript o una regla mas larga
+   que una clase suelta. */
+
 :root {
-  --primario: #362968;
-  --primario-claro: #4a3a8f;
-  --acento: #e8933a;
-  --fondo: #f7f7fb;
-  --superficie: #ffffff;
-  --texto: #1b1b28;
-  --peligro: #c0392b;
-  --exito: #1e8e5a;
-  --borde: #e2e2ee;
-  --radio: 12px;
-  --sombra: 0 1px 2px rgba(27, 27, 40, .06), 0 6px 18px rgba(54, 41, 104, .08);
+  --base: #0F1115;
+  --superficie: #1B2029;
+  --hondo: #141821;
+  --borde: #2A2F3A;
+  --barra: #12151C;
+  --texto: #EDEFF3;
+  --titulo: #F1F5F9;
+  --apagado: #8B95A7;
+  --marca: #362968;
+  --azul: #4C8DFF;
+  --verde: #34D399;
+  --ambar: #FBBF24;
+  --violeta: #9B8CFF;
+  --rosa: #FB7185;
 }
 
-* { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%;
+}
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--fondo);
+body {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  background-color: var(--base);
   color: var(--texto);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.45;
-  -webkit-font-smoothing: antialiased;
+  /* El POS se usa de pie, con una mano, en un mostrador. Nada de seleccionar
+     texto al azar ni de ampliar con doble toque. */
+  -webkit-tap-highlight-color: transparent;
 }
 
-.app {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 16px 16px 56px;
+/* Todo importe, TC y porcentaje va en la misma tipografia de datos, con
+   cifras de ancho fijo: las columnas de numeros tienen que alinearse
+   solas o el dueño no puede comparar dos tiendas de un vistazo. */
+.font-dato,
+.num {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
 }
 
-/* --- cabecera --- */
-.cabecera {
-  background: var(--primario);
-  color: #fff;
-  border-radius: var(--radio);
-  padding: 14px 16px;
-  box-shadow: var(--sombra);
-  margin-bottom: 16px;
+/* La pulsacion es lo unico que se mueve. Es lo que el dedo toca y lo que
+   el usuario necesita sentir: que el registro quedo. */
+.tap {
+  transition: transform 0.12s ease, opacity 0.12s ease, background-color 0.2s ease,
+    border-color 0.2s ease;
 }
-.cabecera h1 {
+
+.tap:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+.tap-lento {
+  transition: transform 0.18s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.tap-lento:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.9);
+}
+
+.tap-lento:active {
+  transform: scale(0.985);
+}
+
+/* Las barras de desplazamiento en fondo oscuro se ven si se pintan: la de
+   Chrome sale gris claro y rompe el tono de la pantalla. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--hondo);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--borde);
+  border-radius: 999px;
+  border: 2px solid var(--hondo);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3A4150;
+}
+
+/* El input numerico no quiere los controles del navegador: en un mostrador
+   se teclea rapido y las flechas estorban. El campo sigue siendo
+   escribible con teclado. */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
   margin: 0;
-  font-size: 1.15rem;
-  letter-spacing: .2px;
-}
-.cabecera .sub {
-  margin: 2px 0 0;
-  font-size: .82rem;
-  opacity: .82;
-}
-.cabecera nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.cabecera nav a {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 999px;
-  color: #fff;
-  text-decoration: none;
-  font-size: .86rem;
-  background: rgba(255, 255, 255, .12);
-  border: 1px solid rgba(255, 255, 255, .18);
-  transition: transform .2s, background-color .2s;
-}
-.cabecera nav a:hover { transform: scale(1.04); background: rgba(255, 255, 255, .22); }
-.cabecera nav a.activo { background: var(--acento); border-color: var(--acento); color: #221a3f; font-weight: 600; }
-
-/* --- tarjetas --- */
-.tarjeta {
-  background: var(--superficie);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio);
-  box-shadow: var(--sombra);
-  padding: 16px;
-  margin-bottom: 16px;
-  transition: transform .2s, box-shadow .2s;
-}
-.tarjeta h2 {
-  margin: 0 0 10px;
-  font-size: 1rem;
-  color: var(--primario);
-}
-.tarjeta h3 {
-  margin: 14px 0 8px;
-  font-size: .9rem;
-  color: var(--primario-claro);
 }
 
-.rejilla {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
-.rejilla.encargado { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
 
-.metrica {
-  background: var(--fondo);
-  border: 1px solid var(--borde);
-  border-radius: 10px;
-  padding: 10px 12px;
-  transition: transform .2s, box-shadow .2s;
+input[type='number'] {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
 }
-.metrica:hover { transform: scale(1.02); box-shadow: var(--sombra); }
-.metrica .rotulo {
-  display: block;
-  font-size: .72rem;
-  text-transform: uppercase;
-  letter-spacing: .6px;
-  color: #6b6b80;
-}
-.metrica .valor {
-  display: block;
-  margin-top: 2px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--primario);
-}
-.metrica .valor.negro { color: var(--peligro); }
-.metrica .valor.exito { color: var(--exito); }
 
-/* --- formularios --- */
-label {
-  display: block;
-  font-size: .78rem;
-  color: #55556b;
-  margin-bottom: 3px;
+input::placeholder,
+textarea::placeholder {
+  color: #5B6472;
 }
-input, select, textarea {
-  width: 100%;
-  padding: 9px 10px;
-  font: inherit;
-  font-size: .92rem;
-  color: var(--texto);
-  background: #fff;
-  border: 1px solid #cfcfdf;
-  border-radius: 8px;
-  transition: transform .2s, box-shadow .2s, border-color .2s;
-}
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--primario-claro);
-  box-shadow: 0 0 0 3px rgba(74, 58, 143, .16);
-}
-.campo { margin-bottom: 10px; }
-.campo.par { display: inline-block; width: calc(50% - 6px); vertical-align: top; }
-.campo.par + .campo.par { margin-left: 12px; }
-.campo select, .campo input { min-width: 0; }
 
-button {
-  font: inherit;
-  font-size: .9rem;
-  font-weight: 600;
-  padding: 10px 16px;
-  border-radius: 9px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: transform .2s, box-shadow .2s, background-color .2s;
+/* En el campo de cantidad el placeholder va centrado porque el numero va
+   centrado: es mas facil de leer de reojo que de alinear a la izquierda
+   veinte veces. */
+.centro {
+  text-align: center;
 }
-button:hover { transform: scale(1.03); box-shadow: var(--sombra); }
-button:active { transform: scale(.99); }
-button[disabled] { opacity: .55; cursor: not-allowed; transform: none; }
 
-.btn-primario { background: var(--primario); color: #fff; }
-.btn-primario:hover { background: var(--primario-claro); }
-.btn-acento { background: var(--acento); color: #2a1f05; }
-.btn-linea { background: #fff; color: var(--primario); border-color: #cfcfdf; }
-.btn-peligro { background: #fff; color: var(--peligro); border-color: #eec4c0; }
-.btn-chico { padding: 6px 10px; font-size: .78rem; }
-
-.acciones { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-
-/* --- tablas --- */
-.tabla-envoltura { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: .86rem;
+/* Fila de la tabla que todavia no se le pago al encargado. Es lo unico que
+   tiene que saltar a la vista: el dueño abre la app y mira esto primero. */
+.pendiente {
+  box-shadow: inset 3px 0 0 var(--ambar);
 }
-caption {
-  text-align: left;
-  font-size: .8rem;
-  color: #55556b;
-  padding-bottom: 6px;
-}
-th, td {
-  padding: 8px 9px;
-  border-bottom: 1px solid var(--borde);
-  text-align: left;
-  white-space: nowrap;
-}
-th { font-size: .72rem; text-transform: uppercase; letter-spacing: .5px; color: #6b6b80; }
-td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
-tbody tr { transition: transform .2s, background-color .2s; }
-tbody tr:hover { background: #fafaff; }
 
-/* --- insignias --- */
-.insignia {
-  display: inline-block;
-  padding: 2px 9px;
-  border-radius: 999px;
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .3px;
-  background: #eceaf6;
-  color: var(--primario);
+.pendiente-fuerte {
+  background-color: rgba(251, 191, 36, 0.08);
+  box-shadow: inset 3px 0 0 var(--ambar);
 }
-.insignia.confirmada { background: #fdf0dd; color: #a56616; }
-.insignia.cerrada { background: #e2f3ea; color: var(--exito); }
-.insignia.borrador { background: #ececf2; color: #5c5c72; }
-.insignia.anulada { background: #f6e3e1; color: var(--peligro); }
-.insignia.pendiente { background: var(--peligro); color: #fff; }
 
-/* --- líneas de venta --- */
-.lineas { display: grid; gap: 12px; }
-.linea {
-  border: 1px solid var(--borde);
-  border-radius: 10px;
-  padding: 12px;
-  background: #fcfcff;
+.anulada {
+  opacity: 0.45;
+  text-decoration: line-through;
 }
-.linea .cabeza-linea {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
+
+/* Al aparecer una vista, entra desde abajo apenas. Sin esto el cambio de
+   pantalla es un corte seco y no se entiende que paso. */
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.linea .num-linea { font-size: .78rem; color: #6b6b80; font-weight: 700; }
-.cuadro-fila { display: flex; flex-wrap: wrap; gap: 10px; }
-.cuadro-fila > .campo { flex: 1 1 120px; margin-bottom: 0; }
 
-.ajustes { margin-top: 12px; }
-.nota { font-size: .8rem; color: #55556b; margin-top: 6px; }
+.vista {
+  animation: entrar 0.22s ease both;
+}
 
-/* --- avisos --- */
+/* Los avisos flotantes se deslizan desde abajo. */
+@keyframes subir-aviso {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .aviso {
-  position: fixed;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%) scale(.96);
-  max-width: 92vw;
-  padding: 11px 16px;
-  border-radius: 10px;
-  background: var(--primario);
-  color: #fff;
-  font-size: .88rem;
-  box-shadow: var(--sombra);
-  opacity: 0;
-  transition: transform .25s, opacity .25s;
-  pointer-events: none;
-  z-index: 20;
+  animation: subir-aviso 0.2s ease both;
 }
-.aviso.visible { transform: translateX(-50%) scale(1); opacity: 1; }
-.aviso.malo { background: var(--peligro); }
-.aviso.bueno { background: var(--exito); }
 
-/* --- login --- */
-.login { max-width: 380px; margin: 8vh auto 0; }
-.login h1 { color: var(--primario); font-size: 1.35rem; margin: 0 0 2px; }
-.login p.lema { color: #6b6b80; font-size: .85rem; margin: 0 0 18px; }
-.acciones-login { display: grid; gap: 8px; margin-bottom: 14px; }
-.acciones-login button { width: 100%; text-align: left; }
-
-.vacio { color: #6b6b80; font-size: .88rem; padding: 10px 0; }
-.titulo-seccion { font-size: 1.05rem; color: var(--primario); margin: 4px 0 12px; }
-.fila-boton { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; }
-.fila-boton .campo { flex: 1 1 160px; margin-bottom: 0; }
-.pendiente-fila { background: #fdf3f2; }
-
-.solo-lector { color: #6b6b80; font-size: .8rem; }
-.oculto { display: none; }
-
-@media (max-width: 560px) {
-  .app { padding: 12px 12px 48px; }
-  .campo.par { width: 100%; margin-left: 0; }
-  th, td { padding: 7px 6px; }
-  .acciones button { flex: 1 1 auto; }
+/* En la pantalla de venta los totales cambian mientras se teclea. Si el
+   numero cambiara con una transicion, el dueño leeria un valor que todavia
+   no es el final y creeria que el calculo esta mal. */
+.saldo {
+  transition: color 0.15s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -256,6 +256,46 @@ app.get('/api/auth/session', function (req, res) {
 });
 
 // --- todo lo demas exige sesion -------------------------------------------
+// Una peticion con el metodo equivocado a una ruta de solo lectura se responde
+// 405 aqui, ANTES del middleware de sesion: si esperase, el 401 anonimo taparia
+// el diagnostico y Milo veria 401 en un POST que la UI no deberia mandar.
+// Un metodo equivocado sobre una ruta que existe se respondia con el mismo 404
+// (o con el 401 del middleware de sesion, si la peticion era anonima), que no
+// dice nada. Estas rutas solo aceptan GET: si llega otro metodo, se responde 405
+// nombrando el metodo correcto.
+const RUTAS_SOLO_GET = [
+  /^\/api\/health$/,
+  /^\/api\/diagnostico$/,
+  /^\/api\/tiendas$/,
+  /^\/api\/auth\/session$/,
+  /^\/api\/empleados$/,
+  /^\/api\/tc-hoy$/,
+  /^\/api\/tc-historial$/,
+  /^\/api\/resumen$/,
+  /^\/api\/catalogo$/,
+  /^\/api\/ventas\/[A-Za-z0-9_-]+\/lineas$/,
+  /^\/api\/catalogo\/[^/]+\/precio-sugerido$/
+];
+
+app.use(function (req, res, next) {
+  if (req.method === 'GET' || req.path.indexOf('/api/') !== 0) {
+    next();
+    return;
+  }
+  const esLectura = RUTAS_SOLO_GET.some(function (patron) { return patron.test(req.path); });
+  if (!esLectura) {
+    next();
+    return;
+  }
+  res.set('Allow', 'GET');
+  res.status(405).json({
+    error: 'La ruta ' + req.path + ' solo acepta GET, no ' + req.method +
+      '. En la interfaz se llama api(ruta) sin segundo argumento.',
+    codigo: 405,
+    metodoEsperado: 'GET'
+  });
+});
+
 app.use('/api', auth.exigirSesion);
 
 // --- empleados y tipo de cambio ------------------------------------------

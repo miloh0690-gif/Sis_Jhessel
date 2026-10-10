@@ -287,7 +287,7 @@
     contenedor.appendChild(contenedorClave);
     contenedor.appendChild(crear('div', { clase: 'acciones' }, [botonEnviar]));
 
-    api('/api/tiendas', {}).then(function (datos) {
+    api('/api/tiendas').then(function (datos) {
       pintarBotones((datos && datos.tiendas) || []);
     }, function (e) {
       contenedor.appendChild(vacio('No se pudieron cargar las tiendas: ' + e.message));
@@ -314,7 +314,7 @@
       desde.setDate(desde.getDate() - (dias - 1));
       var desdeIso = desde.toISOString().slice(0, 10);
       var hastaIso = new Date().toISOString().slice(0, 10);
-      api('/api/resumen?desde=' + desdeIso + '&hasta=' + hastaIso, {}).then(function (datos) {
+      api('/api/resumen?desde=' + desdeIso + '&hasta=' + hastaIso).then(function (datos) {
         var r = (datos && datos.resumen) || {};
         vaciar(resumen);
         resumen.appendChild(metrica('Ventas', texto(numero(r.cantidadVentas))));
@@ -475,7 +475,7 @@
       evento: {
         click: function () {
           var textoBusqueda = entradaBusqueda.value.trim();
-          api('/api/catalogo?q=' + encodeURIComponent(textoBusqueda), {}).then(function (datos) {
+          api('/api/catalogo?q=' + encodeURIComponent(textoBusqueda)).then(function (datos) {
             vaciar(resultados);
             var lista = (datos && datos.productos) || [];
             if (lista.length === 0) {
@@ -634,7 +634,7 @@
     ]));
 
     // --- datos iniciales ---
-    api('/api/empleados', {}).then(function (datos) {
+    api('/api/empleados').then(function (datos) {
       var lista = (datos && datos.empleados) || [];
       vaciar(selEmpleado);
       selEmpleado.appendChild(crear('option', { value: '', texto: 'Elegir encargado' }));
@@ -644,7 +644,7 @@
       if (lista.length === 1) { selEmpleado.value = lista[0].idEmpleado; empleadoElegido = selEmpleado.value; }
     }, error);
 
-    api('/api/tc-hoy', {}).then(function (datos) {
+    api('/api/tc-hoy').then(function (datos) {
       var lista = (datos && datos.tc) || (datos && datos.tcs) || [];
       if (lista.length > 0) {
         campoTc.value = texto(numero(lista[0].tcDecimas) / 100).replace('.', ',');
@@ -669,7 +669,7 @@
     function cargar() {
       vaciar(zona);
       zona.appendChild(vacio('Cargando...'));
-      api('/api/ventas?desde=' + desde.value + '&hasta=' + hasta.value, {}).then(function (datos) {
+      api('/api/ventas?desde=' + desde.value + '&hasta=' + hasta.value).then(function (datos) {
         var lista = (datos && datos.ventas) || [];
         vaciar(zona);
         if (lista.length === 0) {
@@ -723,7 +723,7 @@
 
     function cargar() {
       vaciar(zona);
-      api('/api/catalogo?q=' + encodeURIComponent(entrada.value.trim()), {}).then(function (datos) {
+      api('/api/catalogo?q=' + encodeURIComponent(entrada.value.trim())).then(function (datos) {
         var lista = (datos && datos.productos) || [];
         vaciar(zona);
         if (lista.length === 0) {
@@ -795,7 +795,7 @@
     function cargar() {
       var desdeIso = desde.toISOString().slice(0, 10);
       var hastaIso = hasta.toISOString().slice(0, 10);
-      api('/api/resumen?desde=' + desdeIso + '&hasta=' + hastaIso, {}).then(function (datos) {
+      api('/api/resumen?desde=' + desdeIso + '&hasta=' + hastaIso).then(function (datos) {
         var resumen = (datos && datos.resumen) || {};
         vaciar(total);
         total.appendChild(metrica('Tiendas', texto((datos.tiendas || []).length)));
@@ -863,7 +863,7 @@
     var inPagado = crear('input', { type: 'number', min: '0', step: '0.01', value: '0' });
 
     function cargarTiendas() {
-      api('/api/tiendas', {}).then(function (datos) {
+      api('/api/tiendas').then(function (datos) {
         vaciar(selTienda);
         ((datos && datos.tiendas) || []).forEach(function (tienda) {
           selTienda.appendChild(crear('option', { value: tienda.idTienda, texto: tienda.nombre }));
@@ -945,7 +945,7 @@
     var zonaTc = crear('div', {});
 
     function cargarTiendas() {
-      api('/api/tiendas', {}).then(function (datos) {
+      api('/api/tiendas').then(function (datos) {
         var tiendas = (datos && datos.tiendas) || [];
         vaciar(zonaComisiones);
         if (tiendas.length === 0) {
@@ -983,7 +983,7 @@
     }
 
     function cargarEmpleados() {
-      api('/api/empleados', {}).then(function (datos) {
+      api('/api/empleados').then(function (datos) {
         var lista = (datos && datos.empleados) || [];
         vaciar(zonaEmpleados);
         if (lista.length === 0) {
@@ -1034,7 +1034,7 @@
     function cargarTc() {
       var desde = new Date();
       desde.setDate(desde.getDate() - 29);
-      api('/api/tc-historial?desde=' + desde.toISOString().slice(0, 10) + '&hasta=' + new Date().toISOString().slice(0, 10), {})
+      api('/api/tc-historial?desde=' + desde.toISOString().slice(0, 10) + '&hasta=' + new Date().toISOString().slice(0, 10))
         .then(function (datos) {
           var lista = (datos && datos.tc) || (datos && datos.tcs) || [];
           vaciar(zonaTc);
@@ -1087,7 +1087,7 @@
     estado.vista = vista;
     vaciar(app);
 
-    api('/api/auth/session', {}).then(function (datos) {
+    api('/api/auth/session').then(function (datos) {
       var sesion = (datos && datos.sesion) || null;
       estado.sesion = sesion;
 

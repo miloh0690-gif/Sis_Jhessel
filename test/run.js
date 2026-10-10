@@ -17,7 +17,8 @@ const ARCHIVOS = [
   'permisos-tienda',
   'cierres',
   'codegs',
-  'ui'
+  'ui',
+  'rutas'
 ];
 
 const raiz = path.join(__dirname, '..');

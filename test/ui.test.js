@@ -41,10 +41,12 @@ const RADAS = ['#/login', '#/inicio', '#/nueva', '#/ventas', '#/catalogo', '#/co
 let hashActual = '#/login';
 
 const llamadas = [];
+const peticiones = [];
 let sesionDevuelta = { rol: 'dueno', idTienda: '', nombre: 'Dueno' };
 
 function fakeFetch(rutaUrl, opciones) {
   llamadas.push(rutaUrl);
+  peticiones.push({ ruta: rutaUrl, metodo: (opciones && opciones.method) || 'GET' });
   let cuerpo = {};
   if (/\/api\/auth\/session$/.test(rutaUrl)) {
     cuerpo = { sesion: sesionDevuelta };
@@ -161,4 +163,55 @@ test('un encargado en #/consolidado no recibe datos de las 4 tiendas', async () 
   const datos = llamadas.slice(antes)
     .filter(u => /resumen|ventas|cierres|empleados|catalogo/.test(u));
   assert.deepEqual(datos, []);
+});
+
+// Rutas que el servidor solo expone como GET (verificado con grep de app.get en
+// server.js). Un POST a cualquiera de ellas cae en el middleware de sesion y
+// vuelve 401; y POST /api/ventas?desde=..&hasta=.. crea una venta de verdad.
+const SOLO_LECTURA = [
+  /^\/api\/tiendas$/,
+  /^\/api\/auth\/session$/,
+  /^\/api\/empleados$/,
+  /^\/api\/tc-hoy$/,
+  /^\/api\/tc-historial/,
+  /^\/api\/resumen/,
+  /^\/api\/ventas\/precio-sugerido$/,
+  /^\/api\/ventas\?/,
+  /^\/api\/ventas$/
+];
+
+test('ninguna vista pide por POST una ruta que el servidor solo expone como GET', async () => {
+  const vistas = RADAS.filter(h => h !== '#/login');
+  for (const rol of [
+    { rol: 'dueno', idTienda: '', nombre: 'Dueno' },
+    { rol: 'tienda', idTienda: 'T1', nombre: 'Camila' }
+  ]) {
+    sesionDevuelta = rol;
+    for (const hash of vistas) {
+      const antes = peticiones.length;
+      hashActual = hash;
+      raiz.children = [];
+      raiz._texto = '';
+      contexto.__hashchange();
+      await asserts();
+      const malas = peticiones.slice(antes)
+        .filter(p => p.metodo === 'POST')
+        .filter(p => SOLO_LECTURA.some(patron => patron.test(p.ruta)))
+        .map(p => p.metodo + ' ' + p.ruta);
+      assert.deepEqual(malas, [], rol.rol + ' en ' + hash + ' mando POST a rutas de lectura');
+    }
+  }
+});
+
+test('el formulario de login pide las tiendas con GET, no con POST', async () => {
+  sesionDevuelta = null;
+  const antes = peticiones.length;
+  hashActual = '#/login';
+  raiz.children = [];
+  raiz._texto = '';
+  contexto.__hashchange();
+  await asserts();
+  const tiendas = peticiones.slice(antes).filter(p => /\/api\/tiendas$/.test(p.ruta));
+  assert.ok(tiendas.length > 0, 'el login no pidio las tiendas');
+  assert.deepEqual(tiendas.map(p => p.metodo), tiendas.map(() => 'GET'));
 });

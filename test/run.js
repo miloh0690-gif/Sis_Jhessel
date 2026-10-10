@@ -18,7 +18,8 @@ const ARCHIVOS = [
   'cierres',
   'codegs',
   'ui',
-  'rutas'
+  'rutas',
+  'e2e'
 ];
 
 const raiz = path.join(__dirname, '..');

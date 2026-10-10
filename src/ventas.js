@@ -86,7 +86,10 @@ function claveValida(valor) {
 // La sesion manda. Si el dueno esta registrando para una tienda, el idTienda
 // tiene que venir en el cuerpo porque el dueno no pertenece a ninguna.
 function tiendaDeSesion(sesion, cuerpo) {
-  if (sesion && sesion.rol === 'DUENO') {
+  // El rol viene de auth.ROLES, que es en MINUSCULAS. Comparar en mayusculas
+  // hacia que el dueño cayera al camino de la tienda, con idTienda vacio, y
+  // no podia registrar una venta para ninguna tienda.
+  if (sesion && estados.normalizarRol(sesion.rol) === estados.ROLES.DUENO) {
     return sanearTexto(cuerpo.idTienda, 64);
   }
   return String((sesion && sesion.idTienda) || '');
@@ -246,6 +249,12 @@ async function guardar({ sesion, cuerpo } = {}) {
 
   const preparado = await preparar({ sesion: sesion, cuerpo: datos });
   const venta = Object.assign({}, preparado.venta, { claveIdempotencia: clave });
+
+  // El id lo fija el servidor, no el script: asi el cliente conoce el id antes
+  // de escribir y la segunda capa de idempotencia puede compararlo. El .gs lo
+  // exige (lanza 'La venta no trae IdVenta') y lo devuelve cuando la fila ya
+  // existia por clave.
+  venta.idVenta = String(cuerpo.idVenta || ledger.nuevoId('V')).trim() || ledger.nuevoId('V');
 
   // Una sola llamada: el .gs escribe venta, lineas y TcDia bajo un solo lock.
   const escrito = await sheets.escribir({

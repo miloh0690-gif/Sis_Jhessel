@@ -142,9 +142,15 @@ async function leer(accion, extra) {
   const base = (accion && typeof accion === 'object')
     ? Object.assign({}, accion)
     : Object.assign({}, extra, { accion: accion });
+  // Se aceptan las dos grafias: el .gs lee e.parameter.action, pero el
+  // llamante puede escribir 'accion'. Con la grafia equivocada la query
+  // llevaba action=undefined y el script respondia 'Accion no reconocida'.
+  const nombreAccion = base.accion === undefined ? base.action : base.accion;
+  delete base.accion;
+  delete base.action;
   // El .gs lee e.parameter.action: el parametro de la URL se llama 'action'.
   const query = new URLSearchParams(
-    Object.assign({}, base, { action: base.accion, key: c.clave })
+    Object.assign({}, base, { action: nombreAccion, key: c.clave })
   ).toString();
   const url = c.url + (c.url.indexOf('?') !== -1 ? '&' : '?') + query;
   const controlador = new AbortController();

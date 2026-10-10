@@ -39,7 +39,10 @@ function enteroNoNegativo(valor, nombre) {
 function esDueno(sesion) {
   if (!sesion) return false;
   const rol = texto(sesion.rol).toUpperCase();
-  return rol === 'DUENO' || rol === 'DUEÑO' || rol === 'DUEN0';
+  // El rol de la sesion viene en minusculas (auth.ROLES). Se comparan todas
+  // las grafias porque un 403 aqui seria "el dueno no puede cerrar".
+  const r = String(rol || '').trim().toUpperCase();
+  return r === 'DUENO' || r === 'DUEÑO' || r === 'DUEN0';
 }
 
 function suma(ventas, campo) {

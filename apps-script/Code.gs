@@ -406,6 +406,20 @@ function doGet(e) {
     if (!claveEsValida(parametros.key)) {
       return responderError('NO_AUTORIZADO');
     }
+    // Puerto de clave DESPUES de validar la clave: el diagnostico del servidor
+    // lo usa para saber si SHEETS_API_KEY coincide, asi que tiene que existir.
+    // No devuelve datos de la hoja, solo el conteo.
+    if (accion === 'SALUD_TIENDA') {
+      var hojaVentas = obtenerHoja(SpreadsheetApp.getActiveSpreadsheet(),
+        NOMBRE_HOJA_VENTAS, encabezadosDe(NOMBRE_HOJA_VENTAS));
+      var filas = hojaVentas.getLastRow() < 2 ? 0 : hojaVentas.getLastRow() - 1;
+      return responderJSON({
+        ok: true,
+        hora: ahoraIso(),
+        version: VERSION_SERVICIO,
+        ventas: filas
+      });
+    }
     return responderJSON(despacharLectura(accion, parametros));
   } catch (error) {
     return responderError(error && error.message ? error.message : error);

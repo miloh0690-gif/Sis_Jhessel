@@ -16,151 +16,18 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 
-const CLAVE = 'clave-de-prueba-1234';
 
 // --- hoja de mentira --------------------------------------------------------
 
-function crearHoja(nombre) {
-  return {
-    nombre: nombre,
-    datos: [],
-    congeladas: 0,
-    getLastRow: function () { return this.datos.length; },
-    getLastColumn: function () {
-      let max = 0;
-      for (const fila of this.datos) {
-        if (fila.length > max) max = fila.length;
-      }
-      return max;
-    },
-    setFrozenRows: function (n) { this.congeladas = n; },
-    getFrozenRows: function () { return this.congeladas; },
-    getRange: function (fila, columna, filas, columnas) {
-      const hoja = this;
-      if (filas < 1 || columnas < 1) {
-        throw new Error('Range exceeds grid limits: ' + fila + ',' + columna + ',' + filas);
-      }
-      if (fila + filas - 1 > Math.max(hoja.datos.length, 1)) {
-        throw new Error('Range exceeds grid limits: ' + fila + ',' + columna + ',' + filas);
-      }
-      return {
-        getValues: function () {
-          const salida = [];
-          for (let f = 0; f < filas; f++) {
-            const real = hoja.datos[fila - 1 + f] || [];
-            const linea = [];
-            for (let c = 0; c < columnas; c++) {
-              linea.push(real[columna - 1 + c] === undefined ? '' : real[columna - 1 + c]);
-            }
-            salida.push(linea);
-          }
-          return salida;
-        },
-        getValue: function () {
-          const real = hoja.datos[fila - 1] || [];
-          const v = real[columna - 1];
-          return v === undefined ? '' : v;
-        },
-        setValue: function (valor) {
-          while (hoja.datos.length < fila) hoja.datos.push([]);
-          if (!hoja.datos[fila - 1]) hoja.datos[fila - 1] = [];
-          hoja.datos[fila - 1][columna - 1] = valor;
-          return this;
-        },
-        setFontWeight: function () { return this; },
-        setFontSize: function () { return this; },
-        setHorizontalAlignment: function () { return this; },
-        setNumberFormat: function () { return this; },
-        setValues: function (matriz) {
-          for (let f = 0; f < filas; f++) {
-            while (hoja.datos.length < fila + f) hoja.datos.push([]);
-            if (!hoja.datos[fila - 1 + f]) hoja.datos[fila - 1 + f] = [];
-            for (let c = 0; c < columnas; c++) {
-              hoja.datos[fila - 1 + f][columna - 1 + c] = matriz[f][c];
-            }
-          }
-          return this;
-        }
-      };
-    },
-    appendRow: function (fila) {
-      this.datos.push(fila.slice());
-      return this;
-    },
-    deleteRow: function (indice) {
-      this.datos.splice(indice - 1, 1);
-      return this;
-    }
-  };
-}
-
-function crearEntorno() {
-  const hojas = {};
-  const registro = [];
-  const ss = {
-    getSheetByName: function (nombre) { return hojas[nombre] || null; },
-    insertSheet: function (nombre) {
-      hojas[nombre] = crearHoja(nombre);
-      return hojas[nombre];
-    }
-  };
-
-  const contexto = {
-    SpreadsheetApp: {
-      getActiveSpreadsheet: function () { return ss; }
-    },
-    PropertiesService: {
-      getScriptProperties: function () {
-        return { getProperty: function () { return CLAVE; } };
-      }
-    },
-    LockService: {
-      getScriptLock: function () {
-        return {
-          waitLock: function () { return true; },
-          releaseLock: function () { registro.push('release'); }
-        };
-      }
-    },
-    Logger: { log: function (mensaje) { registro.push(String(mensaje)); } },
-    Utilities: {
-      getUuid: function () { return '00000000-0000-4000-8000-000000000000'; }
-    },
-    ContentService: {
-      MimeType: { JSON: 'application/json' },
-      createTextOutput: function (texto) {
-        return {
-          setMimeType: function () {
-            return { texto: texto, getContent: function () { return texto; } };
-          }
-        };
-      }
-    }
-  };
-  contexto.globalThis = contexto;
-
-  vm.createContext(contexto);
-  const fuente = fs.readFileSync(
-    path.join(__dirname, '..', 'apps-script', 'Code.gs'), 'utf8');
-  vm.runInContext(fuente, contexto, { filename: 'Code.gs' });
-
-  return { contexto, hojas, registro };
-}
-
-function respuesta(objeto) {
-  return JSON.parse(objeto.getContent());
-}
-
-// `sheets.escribir` manda la clave en el cuerpo del POST (Apps Script no lee
-// cabeceras HTTP), asi que el arnes la manda igual.
-function post(entorno, cuerpo) {
-  const evento = { postData: { contents: JSON.stringify(Object.assign({ apiKey: CLAVE }, cuerpo)) } };
-  return respuesta(entorno.contexto.doPost(evento));
-}
-
-function get(entorno, parametros) {
-  return respuesta(entorno.contexto.doGet({ parameter: parametros }));
-}
+// La hoja falsa vive en test/hoja-falsa.js: test/e2e.test.js usa la misma,
+// y dos copias divergirían sin avisar.
+const falsa = require('./hoja-falsa.js');
+const CLAVE = falsa.CLAVE;
+const crearHoja = falsa.crearHoja;
+const crearEntorno = falsa.crearEntorno;
+const respuesta = falsa.respuesta;
+const post = falsa.post;
+const get = falsa.get;
 
 const VENTA = {
   idVenta: 'V1',

@@ -7,10 +7,10 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "pruebas": "node --test test/",
+    "pruebas": "node test/run.js",
     "hash-clave": "node scripts/hash-clave.js",
-    "sembrar": "node scripts/sembrar-catalogo.js",
-    "sintaxis": "node scripts/verificar-sintaxis.js"
+    "sintaxis": "node scripts/verificar-sintaxis.js",
+    "sembrar-catalogo": "node scripts/sembrar-catalogo.js"
   },
   "dependencies": {
     "dotenv": "^16.4.7",

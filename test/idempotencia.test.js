@@ -43,7 +43,8 @@ function conHoja(opciones) {
     escribir: sheets.escribir,
     listarVentas: ledger.listarVentas,
     listarEmpleados: ledger.listarEmpleados,
-    listarTiendas: ledger.listarTiendas
+    listarTiendas: ledger.listarTiendas,
+    listarLineasDe: ledger.listarLineasDe
   };
   const escrituras = [];
   sheets.escribir = async function (payload) {
@@ -53,12 +54,14 @@ function conHoja(opciones) {
   ledger.listarVentas = async () => (op.ventas || []).slice();
   ledger.listarEmpleados = async () => EMPLEADOS.slice();
   ledger.listarTiendas = async () => TIENDAS.slice();
+  ledger.listarLineasDe = async () => (op.lineas || []).slice();
   ventas.limpiarOperaciones();
   const restaurar = function () {
     sheets.escribir = anteriores.escribir;
     ledger.listarVentas = anteriores.listarVentas;
     ledger.listarEmpleados = anteriores.listarEmpleados;
     ledger.listarTiendas = anteriores.listarTiendas;
+    ledger.listarLineasDe = anteriores.listarLineasDe;
     ventas.limpiarOperaciones();
   };
   return { escrituras, restaurar };
@@ -370,4 +373,128 @@ test('listarLineasDe expone el detalle de una venta', function () {
       assert.equal(lineas[0].modelo, 'Galaxy A54');
     })
     .finally(function () { ledger.listarLineasDe = anterior; });
+});
+// --- 9) el rol de la sesion real es minusculo ----------------------------
+// `auth.exigirAuth` deja `rol: 'dueno'` en `req.sesion` (minuscula, ver
+// `auth.ROLES`). Los fixtures de arriba usaban 'DUENO' mayuscula, que la capa
+// de autenticacion nunca produce: un dueno real habia quedado como tienda.
+
+test('dueno en minuscula puede cerrar una venta confirmada', async function () {
+  const venta = {
+    idVenta: 'V1', idTienda: 'T1', idEmpleado: 'E1', estado: 'CONFIRMADA',
+    fecha: '2026-10-08', dia: '2026-10-08'
+  };
+  const hoja = conHoja({ ventas: [venta] });
+  try {
+    const r = await ventas.cambiarEstado({
+      sesion: { rol: 'dueno', idTienda: '', idEmpleado: '', nombre: 'Dueno' },
+      idVenta: 'V1',
+      hasta: 'CERRADA'
+    });
+    assert.equal(hoja.escrituras.length, 1);
+    assert.equal(hoja.escrituras[0].tipoOperacion, 'CAMBIAR_ESTADO');
+    assert.equal(r.venta.estado, 'CERRADA');
+  } finally {
+    hoja.restaurar();
+  }
+});
+
+test('dueno en minuscula puede anular una venta confirmada', async function () {
+  const venta = {
+    idVenta: 'V1', idTienda: 'T1', idEmpleado: 'E1', estado: 'CONFIRMADA',
+    fecha: '2026-10-08', dia: '2026-10-08'
+  };
+  const hoja = conHoja({ ventas: [venta] });
+  try {
+    await ventas.cambiarEstado({
+      sesion: { rol: 'dueno', idTienda: '', idEmpleado: '', nombre: 'Dueno' },
+      idVenta: 'V1',
+      hasta: 'ANULADA'
+    });
+    assert.equal(hoja.escrituras[0].tipoOperacion, 'CAMBIAR_ESTADO');
+  } finally {
+    hoja.restaurar();
+  }
+});
+
+test('dueno en minuscula puede tocar el costo de una venta confirmada', async function () {
+  const venta = {
+    idVenta: 'V1', idTienda: 'T1', idEmpleado: 'E1', estado: 'CONFIRMADA',
+    fecha: '2026-10-08', dia: '2026-10-08'
+  };
+  const hoja = conHoja({ ventas: [venta], lineas: [{ idVenta: 'V1', idProducto: 'P1', modelo: 'Galaxy A54', cantidad: 1, precioUsdCents: 34_000, costoUnitarioUsdCents: 30_000 }] });
+  try {
+    await ventas.actualizarVenta({
+      sesion: { rol: 'dueno', idTienda: '', idEmpleado: '', nombre: 'Dueno' },
+      idVenta: 'V1',
+      cuerpo: {
+        idEmpleado: 'E1',
+        moneda: 'USD',
+        tipoCambio: '7,25',
+        lineas: [{ modelo: 'Galaxy A54', cantidad: 1, precio: '340', costo: '310' }],
+        ajuste: '0'
+      }
+    });
+    assert.equal(hoja.escrituras[0].tipoOperacion, 'ACTUALIZAR_VENTA');
+    // El costo corregido por el dueno tiene que llegar a la hoja: si se
+    // descarta y se conserva el viejo, el dueno corrige y no pasa nada.
+    assert.equal(hoja.escrituras[0].venta.costoTotalUsdCents, 31_000);
+    assert.equal(hoja.escrituras[0].lineas[0].costoUnitarioUsdCents, 31_000);
+  } finally {
+    hoja.restaurar();
+  }
+});
+
+test('encargado NO puede cambiar el costo de una venta confirmada: 404, no un cambio silencioso', async function () {
+  const venta = {
+    idVenta: 'V1', idTienda: 'T1', idEmpleado: 'E1', estado: 'CONFIRMADA',
+    fecha: '2026-10-08', dia: '2026-10-08'
+  };
+  const hoja = conHoja({ ventas: [venta], lineas: [{ idVenta: 'V1', idProducto: 'P1', modelo: 'Galaxy A54', cantidad: 1, precioUsdCents: 34_000, costoUnitarioUsdCents: 30_000 }] });
+  try {
+    // Rechazo explicito: el encargado ve un 404 y sabe que no se guardo. Un
+    // descarte silencioso del costo seria peor que el rechazo.
+    await assert.rejects(
+      function () {
+        return ventas.actualizarVenta({
+          sesion: { rol: 'TIENDA', idTienda: 'T1', idEmpleado: 'E1', nombre: 'Camila' },
+          idVenta: 'V1',
+          cuerpo: {
+            idEmpleado: 'E1',
+            moneda: 'USD',
+            tipoCambio: '7,25',
+            lineas: [{ modelo: 'Galaxy A54', cantidad: 1, precio: '340', costo: '310' }],
+            ajuste: '0'
+          }
+        });
+      },
+      function (e) { return e.codigo === 404 && /confirmada/.test(e.message); }
+    );
+    assert.equal(hoja.escrituras.length, 0);
+  } finally {
+    hoja.restaurar();
+  }
+});
+
+test('encargado en minuscula NO puede cerrar una venta confirmada', async function () {
+  const venta = {
+    idVenta: 'V1', idTienda: 'T1', idEmpleado: 'E1', estado: 'CONFIRMADA',
+    fecha: '2026-10-08', dia: '2026-10-08'
+  };
+  const hoja = conHoja({ ventas: [venta] });
+  try {
+    await assert.rejects(
+      function () {
+        return ventas.cambiarEstado({
+          sesion: { rol: 'tienda', idTienda: 'T1', idEmpleado: 'E1', nombre: 'Camila' },
+          idVenta: 'V1',
+          hasta: 'CERRADA'
+        });
+      },
+      function (e) { return e.codigo === 404; }
+    );
+    assert.equal(hoja.escrituras.length, 0);
+  } finally {
+    hoja.restaurar();
+  }
 });

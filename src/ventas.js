@@ -281,7 +281,11 @@ async function ventaPorId(idVenta) {
 }
 
 function duenoDeLaSesion(sesion) {
-  return Boolean(sesion) && sesion.rol === 'DUENO';
+  // `auth` guarda el rol en minuscula (`auth.ROLES`), pero esta funcion se
+  // llama desde codigo de pruebas y de un futuro modulo con la otra grafia.
+  // Comparar solo 'DUENO' hacia que el dueno real se tratara como encargado y
+  // sus correcciones de costo se descartaran en silencio.
+  return estados.normalizarRol(sesion && sesion.rol) === estados.ROLES.DUENO;
 }
 
 async function actualizarVenta({ sesion, idVenta, cuerpo } = {}) {

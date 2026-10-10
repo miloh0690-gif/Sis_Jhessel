@@ -15,7 +15,8 @@ const ARCHIVOS = [
   'catalogo',
   'idempotencia',
   'cierres',
-  'codegs'
+  'codegs',
+  'ui'
 ];
 
 const raiz = path.join(__dirname, '..');

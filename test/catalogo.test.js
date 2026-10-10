@@ -9,10 +9,10 @@ const sheets = require('../src/sheets');
 const catalogo = require('../src/catalogo');
 
 const CRUDAS = [
-  // IdProducto Marca Modelo PrecioRefUsdCents Specs Activo
-  ['P1', 'Samsung', 'Galaxy A54 5G', '34000', '{"so":"Android 13","ram":6}', '1'],
-  ['P2', 'Xiaomi', 'Redmi Note 13', '18500', '{"so":"Android 13"}', '1'],
-  ['P3', 'Apple', 'iPhone 12', '52000', '{"so":"iOS 16"}', '0']
+  // IdProducto Marca Modelo PrecioRefUsdCents Caracteristicas Imagen Activo
+  ['P1', 'Samsung', 'Galaxy A54 5G', '34000', 'Pantalla: Super AMOLED 120Hz \u00b7 C\u00e1mara de 48 MP', 'https://fdn2.gsmarena.com/a.jpg', '1'],
+  ['P2', 'Xiaomi', 'Redmi Note 13', '18500', 'Pantalla: AMOLED 120Hz \u00b7 Camara de 108 MP', 'https://fdn2.gsmarena.com/b.jpg', '1'],
+  ['P3', 'Apple', 'iPhone 12', '52000', 'Pantalla: OLED \u00b7 Camara de 12 MP', 'https://fdn2.gsmarena.com/c.jpg', '0']
 ];
 
 function conHoja(fn) {
@@ -48,7 +48,7 @@ test('buscar normaliza acentos: camara encuentra Camara', function () {
   return conHoja(async function () {
     sheets.leer = async () => ({
       status: 'OK',
-      filas: [['P9', 'Generico', 'Cámara de 48 MP', '1000', '{}', '1']]
+      filas: [['P9', 'Generico', 'Cámara de 48 MP', '1000', 'Pantalla IPS', '', '1']]
     });
     catalogo.limpiarCache();
     assert.equal((await catalogo.buscar('camara')).length, 1);

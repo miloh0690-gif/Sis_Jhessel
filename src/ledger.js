@@ -22,7 +22,8 @@ const COLUMNAS = Object.freeze({
   cierres: ['IdCierre', 'Fecha', 'IdTienda', 'Tienda', 'CerradoPor', 'Ventas',
     'TotalComisionBsCents', 'TotalNetoBsCents', 'PagadoBsCents', 'SaldoBsCents', 'CerradoEn'],
   tcDia: ['Fecha', 'IdEmpleado', 'Empleado', 'IdTienda', 'TcDecimas', 'RegistradoEn'],
-  catalogo: ['IdProducto', 'Marca', 'Modelo', 'PrecioRefUsdCents', 'Specs', 'Activo']
+  catalogo: ['IdProducto', 'Marca', 'Modelo', 'PrecioRefUsdCents', 'Caracteristicas',
+    'Imagen', 'Activo']
 });
 
 // --- conversion de lo que viene de la hoja --------------------------------
@@ -203,7 +204,8 @@ function normalizarProducto(fila, get) {
     marca: texto(get(fila, 'Marca')),
     modelo: texto(get(fila, 'Modelo')),
     precioRefUsdCents: entero(get(fila, 'PrecioRefUsdCents')),
-    specs: texto(get(fila, 'Specs')),
+    caracteristicas: texto(get(fila, 'Caracteristicas')),
+    imagen: texto(get(fila, 'Imagen')),
     activo: bandera(get(fila, 'Activo'))
   };
 }

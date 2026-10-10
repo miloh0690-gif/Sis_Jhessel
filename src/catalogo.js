@@ -35,8 +35,9 @@ function todos() {
 
 // La fila cruda puede venir por encabezado (el .gs manda cabeceras) o por
 // posicion canonica. Las columnas de la hoja Catalogo son:
-// IdProducto Marca Modelo PrecioRefUsdCents Specs Activo
-const COLUMNAS = ['IdProducto', 'Marca', 'Modelo', 'PrecioRefUsdCents', 'Specs', 'Activo'];
+// IdProducto Marca Modelo PrecioRefUsdCents Caracteristicas Imagen Activo
+const COLUMNAS = ['IdProducto', 'Marca', 'Modelo', 'PrecioRefUsdCents', 'Caracteristicas',
+  'Imagen', 'Activo'];
 
 function productoDesdeFila(fila) {
   const cab = fila && fila.cabeceras ? fila.cabeceras : null;
@@ -52,8 +53,9 @@ function productoDesdeFila(fila) {
     marca: String(get('Marca', 1) || '').trim(),
     modelo: String(get('Modelo', 2) || '').trim(),
     precioRefUsdCents: money.entero(get('PrecioRefUsdCents', 3)),
-    specs: String(get('Specs', 4) || '').trim(),
-    activo: bandera(get('Activo', 5))
+    caracteristicas: String(get('Caracteristicas', 4) || '').trim(),
+    imagen: String(get('Imagen', 5) || '').trim(),
+    activo: bandera(get('Activo', 6))
   };
 }
 

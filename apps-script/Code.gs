@@ -26,7 +26,7 @@
 
 var NOMBRE_HOJA_TIENDAS = 'Tiendas';
 var NOMBRE_HOJA_EMPLEADOS = 'Empleados';
-var NOMBRE_HOJA_CATALOGO = 'Catalogo';
+var NOMBRE_HOJA_CATALOGO = 'Precios';
 var NOMBRE_HOJA_VENTAS = 'Ventas';
 var NOMBRE_HOJA_LINEAS = 'VentaLineas';
 var NOMBRE_HOJA_CIERRES = 'Cierres';
@@ -47,8 +47,11 @@ var ENCABEZADO_TIENDAS = ['IdTienda', 'Nombre', 'Empleados', 'PctComision', 'Cla
 
 var ENCABEZADO_EMPLEADOS = ['IdEmpleado', 'Nombre', 'IdTienda', 'Activo', 'CreadoEn'];
 
-var ENCABEZADO_CATALOGO = ['IdProducto', 'Marca', 'Modelo', 'PrecioRefUsdCents', 'Specs',
-  'Activo'];
+// La hoja NO lleva stock ni cantidad: es la lista de precios referenciales
+// con las caracteristicas del aparato. El equipo que la tienda tiene o no
+// tiene no se controla aqui.
+var ENCABEZADO_CATALOGO = ['IdProducto', 'Marca', 'Modelo', 'PrecioRefUsdCents',
+  'Caracteristicas', 'Imagen', 'Activo'];
 
 // Nota: el servidor tambien escribe `Tienda` y `Unidades`, que el ledger usa
 // para el consolidado. Van aqui para que la hoja los tenga desde el primer dia.
@@ -372,6 +375,7 @@ function despacharLectura(accion, parametros) {
       return reportar(ss, NOMBRE_HOJA_TIENDAS, parametros, null);
     case 'REPORTE_EMPLEADOS':
       return reportar(ss, NOMBRE_HOJA_EMPLEADOS, parametros, null);
+    case 'REPORTE_PRECIOS':
     case 'REPORTE_CATALOGO':
       return reportar(ss, NOMBRE_HOJA_CATALOGO, parametros, null);
     case 'REPORTE_VENTAS':
@@ -496,6 +500,7 @@ function despacharEscritura(operacion, datos) {
       return guardarTienda(ss, datos);
     case 'GUARDAR_EMPLEADOS':
       return guardarEmpleados(ss, datos);
+    case 'SEMBRAR_PRECIOS':
     case 'SEMBRAR_CATALOGO':
       return sembrarCatalogo(ss, datos);
     default:
@@ -818,7 +823,7 @@ function cerrarTienda(ss, datos) {
   return { ok: true, id: cierre.idCierre || '', ventasCerradas: cerradas, duplicada: false };
 }
 
-// --- tiendas, empleados y catalogo -----------------------------------------
+// --- tiendas, empleados y lista de precios --------------------------------
 
 function guardarTienda(ss, datos) {
   var tienda = datos.tienda || {};
@@ -908,7 +913,7 @@ function guardarPrecio(ss, datos) {
   var hoja = obtenerHoja(ss, NOMBRE_HOJA_CATALOGO, ENCABEZADO_CATALOGO);
   var existente = filaConValor(ss, NOMBRE_HOJA_CATALOGO, 'IdProducto', idProducto);
   if (!existente) {
-    throw new Error('No se encontro ese producto en el catalogo.');
+    throw new Error('Ese equipo no esta en la lista de precios.');
   }
   hoja.getRange(existente.indiceExcel,
     columna(encabezadosDeHoja(hoja), 'PrecioRefUsdCents', 3) + 1)
@@ -948,7 +953,8 @@ function sembrarCatalogo(ss, datos) {
       sanitizarTexto(producto.modelo || id),
       entero(producto.precioRefUsdCents !== undefined
         ? producto.precioRefUsdCents : producto.precioUsdCents),
-      sanitizarTexto(producto.specs || ''),
+      sanitizarTexto(producto.caracteristicas || producto.specs || ''),
+      sanitizarTexto(producto.imagen || ''),
       producto.activo === false ? '0' : '1'
     ]);
     existentes[id] = true;

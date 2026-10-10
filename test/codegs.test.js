@@ -362,10 +362,10 @@ test('GUARDAR_EMPLEADOS da de alta y baja sin perder lo que no se manda', () => 
 
 test('GUARDAR_PRECIO actualiza el producto y falla si no existe', () => {
   const entorno = crearEntorno();
-  post(entorno, { tipoOperacion: 'SEMBRAR_CATALOGO', productos: [{ idProducto: 'P1', marca: 'Samsung', modelo: 'Galaxy A54', precioRefUsdCents: 34000, specs: '5G' }] });
+  post(entorno, { tipoOperacion: 'SEMBRAR_CATALOGO', productos: [{ idProducto: 'P1', marca: 'Samsung', modelo: 'Galaxy A54', precioRefUsdCents: 34000, caracteristicas: 'Pantalla AMOLED 120Hz' }] });
   const r = post(entorno, { tipoOperacion: 'GUARDAR_PRECIO', idProducto: 'P1', precioUsdCents: 35000 });
   assert.equal(r.precioUsdCents, 35000);
-  assert.equal(entorno.hojas.Catalogo.datos[1][3], 35000);
+  assert.equal(entorno.hojas.Precios.datos[1][3], 35000);
 
   const r2 = post(entorno, { tipoOperacion: 'GUARDAR_PRECIO', idProducto: 'P9', precioUsdCents: 100 });
   assert.equal(r2.status, 'ERROR');
@@ -392,7 +392,7 @@ test('SEMBRAR_CATALOGO saltea los que ya estan y respeta el tope', () => {
   });
   assert.equal(segundo.agregados, 1);
   assert.equal(segundo.salteados, 1);
-  assert.equal(entorno.hojas.Catalogo.datos[1][3], 34000, 'el precio viejo no se pisa');
+  assert.equal(entorno.hojas.Precios.datos[1][3], 34000, 'el precio viejo no se pisa');
 
   const muchos = [];
   for (let i = 0; i < 250; i++) {

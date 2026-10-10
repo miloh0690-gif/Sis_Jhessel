@@ -13,8 +13,14 @@ const COMISION_BP_MINIMO = 0;
 
 // --- basicos ---------------------------------------------------------------
 
+// Convierte lo que una persona teclea a centavos enteros. "340", "340,00" y
+// "340.00" son lo mismo: los bolivianos escriben la coma decimal y el teclado
+// del celular tambien la ofrece. Sin esta normalizacion un precio tecleado con
+// coma daba 0 en vez de 34000.
 function aCents(valor) {
-  const n = Number(valor);
+  if (valor === null || valor === undefined || valor === '') return 0;
+  const texto = String(valor).trim().replace(',', '.');
+  const n = Number(texto);
   return Number.isFinite(n) ? Math.round(n * 100) : 0;
 }
 

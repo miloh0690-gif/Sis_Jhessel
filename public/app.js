@@ -853,7 +853,7 @@
         evento: async function () {
           try {
             await api('/api/catalogo/' + encodeURIComponent(producto.idProducto) + '/precio', {
-              cuerpo: { precioUsdCents: precio.value }
+              cuerpo: { precio: precio.value }
             });
             cerrar();
             aviso('Precio guardado.', 'bien');
@@ -1221,16 +1221,16 @@
     const nombre = crear('input', { type: 'text', placeholder: 'Nombre', class: 'h-12 w-full rounded-xl bg-hondo px-3 text-texto outline-none border border-borde focus:border-azul' });
     const tienda = crear('select', { class: 'h-12 w-full rounded-xl bg-hondo px-3 text-texto outline-none border border-borde focus:border-azul' },
       ESTADO.tiendas.map(function (t) { return crear('option', { value: t.idTienda, texto: t.nombre }); }));
-    const clave = crear('input', { type: 'text', placeholder: 'Clave que va a usar para entrar', class: 'h-12 w-full rounded-xl bg-hondo px-3 text-texto outline-none border border-borde focus:border-azul' });
     capa.appendChild(crear('div', { clase: 'tap mx-auto mt-8 max-w-sm space-y-2.5 rounded-2xl border border-borde bg-superficie p-4' }, [
       crear('h3', { clase: 'font-display text-base font-bold text-titulo', texto: 'Nuevo empleado' }),
-      nombre, tienda, clave,
+      crear('p', { clase: 'text-[11px] leading-relaxed text-apagado', texto: 'La clave es de la tienda, no de la persona. Todos los de esa tienda entran con la misma.' }),
+      nombre, tienda,
       boton('Guardar', {
         clase: 'tap w-full rounded-2xl bg-azul py-3.5 font-bold text-white',
         evento: async function () {
           try {
             await api('/api/ajustes/empleados', {
-              cuerpo: { empleados: [{ nombre: nombre.value, idTienda: tienda.value }], clave: clave.value }
+              cuerpo: { empleados: [{ nombre: nombre.value, idTienda: tienda.value }] }
             });
             cerrar();
             aviso('Empleado dado de alta.', 'bien');

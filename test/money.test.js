@@ -5,6 +5,20 @@ const assert = require('node:assert/strict');
 
 const m = require('../src/money');
 
+test('aCents acepta la coma decimal que escribe la persona', () => {
+  // El tecleo del celular y el teclado Boliviano dan coma. Si esto no se
+  // normaliza, cualquier precio tecleado con coma se guardaba en 0.
+  assert.equal(m.aCents('340,00'), 34000);
+  assert.equal(m.aCents('340.00'), 34000);
+  assert.equal(m.aCents('340'), 34000);
+  assert.equal(m.aCents(340), 34000);
+  assert.equal(m.aCents('0,50'), 50);
+  assert.equal(m.aCents(''), 0);
+  assert.equal(m.aCents(null), 0);
+  assert.equal(m.aCents('treinta'), 0);
+});
+
+
 // El ejemplo textual de Milo: "camila en toda la semana solo ganancia genero
 // 10000bs pero de ella la comision es de 30% asi que el dueño se queda con
 // 7000bs". Usamos TC 10,00 para que las cuentas salgan exactas en enteros.

@@ -504,7 +504,12 @@ app.post('/api/catalogo/:id/precio', async function (req, res) {
       res.status(400).json({ error: 'Falta indicar el producto.' });
       return;
     }
-    const precio = entero(cuerpo.precioUsdCents !== undefined ? cuerpo.precioUsdCents : cuerpo.precioUsd);
+    // El dueno teclea dolares ("340,00"); la columna guarda centavos.
+    // Si viene el campo de centavos se respeta tal cual, que es lo que usan
+    // los otros caminos.
+    const precio = cuerpo.precioUsdCents !== undefined
+      ? entero(cuerpo.precioUsdCents)
+      : money.aCents(cuerpo.precio !== undefined ? cuerpo.precio : cuerpo.precioUsd);
     await catalogo.guardarPrecio(idProducto, precio);
     res.json({ ok: true, idProducto: idProducto, precioUsdCents: precio });
   } catch (e) {
@@ -584,7 +589,11 @@ app.post('/api/ajustes/tienda/:id', exigirDueno, async function (req, res) {
         nombre: texto(cuerpo.nombre, 80),
         pctComision: entero(cuerpo.pctComision !== undefined ? cuerpo.pctComision : cuerpo.comision),
         activa: cuerpo.activa === undefined ? undefined : cuerpo.activa === true,
-        claveHash: cuerpo.claveHash !== undefined ? texto(cuerpo.claveHash, 200) : undefined,
+        // El dueno escribe la clave en claro y el servidor la hashea. Sin esto
+        // no hay forma de dar de alta una tienda que alguien pueda usar.
+        claveHash: cuerpo.claveHash !== undefined
+          ? texto(cuerpo.claveHash, 200)
+          : (cuerpo.clave ? auth.hashearClave(texto(cuerpo.clave, 120)) : undefined),
         creadoPor: texto(req.sesion.nombre, 80)
       }
     });

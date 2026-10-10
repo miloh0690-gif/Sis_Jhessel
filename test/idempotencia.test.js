@@ -297,7 +297,7 @@ test('el dueno reabre una cerrada con motivo y escribe CAMBIAR_ESTADO', function
     sesion: SESION_DUENO,
     idVenta: 'V1',
     hasta: 'CONFIRMADA',
-    motivo: 'falta玻璃 del cliente'
+  motivo: 'falta del cliente'
   })
     .then(function (r) {
       assert.equal(r.venta.estado, 'CONFIRMADA');

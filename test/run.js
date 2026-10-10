@@ -19,6 +19,7 @@ const ARCHIVOS = [
   'codegs',
   'ui',
   'rutas',
+  'ajustes',
   'e2e'
 ];
 

@@ -74,7 +74,7 @@ test('ANULADA es terminal para siempre', function () {
   }
 });
 
-test('pendiente = la que todavia no le给小 dueño el dinero', function () {
+test('pendiente = la que todavia no le dio el dinero al dueño', function () {
   assert.equal(e.estaPendiente('BORRADOR'), true);
   assert.equal(e.estaPendiente('CONFIRMADA'), true);
   assert.equal(e.estaPendiente('CERRADA'), false);

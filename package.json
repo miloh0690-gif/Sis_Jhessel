@@ -10,7 +10,8 @@
     "pruebas": "node test/run.js",
     "hash-clave": "node scripts/hash-clave.js",
     "sintaxis": "node scripts/verificar-sintaxis.js",
-    "sembrar-catalogo": "node scripts/sembrar-catalogo.js"
+    "semilla": "node scripts/semilla-precios.js",
+    "sembrar-precios": "node scripts/semilla-precios.js --subir"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
